@@ -1,0 +1,187 @@
+﻿@page
+@model liaqati_master.Pages.Products.CreateProductModel
+@{
+    ViewData["Title"] = "إضافة منتج";
+    ViewData["LinkName"] = "Categories";
+
+}
+@section Styles{
+
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/select2-bootstrap-5-theme/select2-bootstrap-5-theme.rtl.min.css" rel="stylesheet" />
+    <style>
+        .dark-only .images-viewer {
+            background-color: #2c323f !important;
+        }
+
+        .dark-only .select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option {
+            color: white !important;
+        }
+
+        .dark-only .select2-container--bootstrap-5 .select2-dropdown .select2-results__options .select2-results__option {
+            background-color: #111727 !important;
+            border: .5px solid rgba(36, 105, 92, 0.2);
+            color: white;
+        }
+
+        .dark-only .select2-container--bootstrap-5 .select2-selection--single .select2-selection__rendered {
+            color: white;
+        }
+
+        .dark-only .select2-container--bootstrap-5 .select2-selection {
+            background-color: #111727 !important;
+            border: .5px solid rgba(36, 105, 92, 0.2);
+            color: white;
+        }
+
+        .delete-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            top: -12px;
+            right: -12px;
+        }
+
+        .is-valid + .select2-container--bootstrap-5 .select2-selection, .tox-tinymce.is-valid {
+            border: 2px solid green !important;
+        }
+
+        .is-invalid + .select2-container--bootstrap-5 .select2-selection, .tox-tinymce.not-valid {
+            border: 2px solid #dc3545 !important;
+        }
+
+    </style>
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <h3 class="pb-3 fw-bold text-center">@ViewData["Title"]</h3>
+                    </div>
+                    <form method="post" class="form theme-form" enctype="multipart/form-data">
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label asp-for="Products.Services!.Title"></label>
+                                    <input asp-for="Products.Services!.Title" class="form-control" placeholder="">
+                                    <span asp-validation-for="Products.Services!.Title" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label asp-for="Products.Services!.Price"></label>
+                                    <input asp-for="Products.Services!.Price" class="form-control" placeholder="">
+                                    <span asp-validation-for="Products.Services!.Price" class="text-danger"></span>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label asp-for="Products.Discount"></label>
+                                    <input asp-for="Products.Discount" class="form-control" placeholder="">
+                                    <span asp-validation-for="Products.Discount" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="mb-3">
+                                    <label asp-for="Products.Services!.Category!.Name"></label>
+                                    <select asp-for="Products.Services!.CategoryId" asp-items="Model.CatogeryName" class="form-select" id="single-select-field" data-placeholder="من فضلك حدد اسم الصنف">
+                                        <option value="-1">من فضلك حدد اسم الصنف</option>
+                                    </select>
+                                    <span asp-validation-for="Products.Services!.CategoryId" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label asp-for="Images" class="h6 mb-3"></label>
+                                    <input asp-for="Images" class="form-control" placeholder="" accept="image/*">
+                                    <span asp-validation-for="Images" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <h5 class="h5 my-2 fw-bold">مستعرض الصور</h5>
+                                    <div class="images-viewer d-flex  gap-4 flex-wrap p-4 border bg-light w-100" style="min-height:120px;" id="imagesViewer">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label asp-for="Products.Services!.Description" class="h5 my-2 fw-bold"></label>
+                                    <textarea id="textarea" asp-for="Products.Services!.Description" class="form-control rich-editor" placeholder=""></textarea>
+                                    <span asp-validation-for="Products.Services!.Description" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row justify-content-end ">
+                            <div class="col justify-content-end d-flex">
+                                <div class="mb-3">
+                                    <button class="btn-primary btn  mx-auto col-auto" type="submit"> حقظ التعديلات <i class="bi bi-plus-square-dotted"></i> </button>
+                                    <a class="btn-danger btn  mx-auto col-auto" asp-page="./Index"> الغاء <i class="bi bi-arrow-90deg-down"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/javascript/uploadfiles.js" asp-append-version="true"></script>
+    @*    <script src="~/lib/tinymce/tinymce.min.js"></script>
+*@
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="~/javascript/richtexteditor.js" asp-append-version="true"></script>
+    <script src="~/lib/select2/js/select2.full.min.js"></script>
+    <script>
+        //$('#single-select-field').select2({
+        //    theme: "bootstrap-5",
+        //    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+        //    placeholder: $(this).data('placeholder'),
+        //});
+
+
+        //$("#single-select-field").on("change", function () {
+        //    var a = $('#single-select-field').select2('data');
+        //    console.log(a);
+        //    if (a[0].id === '-1')
+        //        $('#single-select-field').addClass('is-invalid');
+        //    else $('#single-select-field').addClass('is-valid');
+
+        //});
+        $(".theme-form").on("submit", function (e) {
+            var myContent = tinymce.get("textarea").getContent();
+            console.log(myContent);
+            if (myContent.length > 0) {
+                $(".field-validation-valid").text("");
+                $(".tox-tinymce").addClass("is-valid");
+            } else {
+                e.preventDefault();
+                $(".field-validation-valid").text("أضف وصفا");
+                $(".tox-tinymce").addClass("not-valid");
+            }
+        })
+    </script>
+
+}

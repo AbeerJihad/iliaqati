@@ -1,0 +1,67 @@
+﻿@page
+@model SportProductsWeb.Pages.Errors._403Model
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
+          crossorigin="anonymous" />
+
+</head>
+<body>
+    <style>
+        @@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap");
+
+        * {
+            font-family: "Tajawal", sans-serif;
+        }
+
+        .cardError403 {
+            background-color: #f3f2f8;
+        }
+
+    </style>
+
+    <div class="container con_image min-vh-100">
+        <div class="row g-0 position-relative min-vh-100 d-flex  justify-content-center align-items-center">
+            <div class="col-md-7 p-4 cardError403 rounded-5">
+                <img style="margin-top: -120px;  opacity:.2" class="img-fluid px-5" src="~/images/error/403.png" />
+                <div class="d-flex flex-column justify-content-start align-items-center">
+                    <h2 class=" mt-3">عذرا لا يمكن الوصول لهذه الصفحة</h2>
+                    <a style="background-color: #e5c362;"
+                       class="btn p-2 w-50 text-white fw-bold my-3mediaBtn"
+                       href="javascript:history.go(-1)">
+                        الرجوع الى الصفحة السابقة
+
+                    </a>
+                    <a style="background-color: #be8adc; "
+                       class="btn w-50 py-2 text-white fw-bold my-3 d-inline-block mediaBtn"
+                       asp-page="/home/index2">
+                        الصفحة الرئيسية
+                    </a>
+                    <a style="color: #be8adc"
+                       class="w-50 fw-bold my-3 d-inline-block text-center h5"
+                       asp-page="/ContactUs/index">
+                        تواصل مع الدعم الفني
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-5   media-div">
+                <img class="img-fluid" style="max-height:700px" src="~/Images/Error/5224519.png" alt="" srcset="" />
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>

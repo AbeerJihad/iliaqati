@@ -1,0 +1,335 @@
+﻿@page
+@model liaqati_master.Areas.Admin.Pages.Profile.IndexModel
+
+
+@{
+    if (User.HasClaim(c => c.Type == Database.Admin && c.Value == "true") || User.HasClaim(c => c.Type == Database.Expert && c.Value == "true"))
+    {
+        Layout = "/Areas/Admin/Pages/Shared/_Layout.cshtml";
+    }
+    else
+    {
+
+        Layout = "/Pages/_Layout.cshtml";
+    }
+}
+<link href="~/assets/css/notifications.css" rel="stylesheet" />
+
+<style>
+    body {
+        background-color: #f5f6f1;
+    }
+
+
+    .Bgheader {
+        background-color: rgb(84,7,99);
+        background: linear-gradient(90deg, rgba(84,7,99,1) 7%, rgba(112,9,121,1) 41%, rgba(98,34,138,1) 100%, rgba(64,96,179,1) 100%);
+    }
+
+    .tab {
+        overflow: hidden;
+        border-bottom: 2px solid #ccc;
+        padding: 10px 0;
+    }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+            /* Change background color of buttons on hover */
+            .tab button:hover {
+                background-color: #A566C8;
+                color: white !important;
+            }
+
+            /* Create an active/current tablink class */
+            .tab button.active {
+                background-color: #A566C8;
+                color: white !important;
+            }
+
+    /* Style the tab content */
+    .tabcontent {
+        padding: 20px 12px;
+        /*border: 1px solid #ccc;*/
+        border-top: none;
+        min-height: 600px;
+    }
+
+    .bgBd {
+        background-color: white;
+        border-radius: 30px;
+        margin-bottom: 5px;
+    }
+
+    h4 {
+        color: #A566C8;
+    }
+
+    hr {
+        margin: 0px 2px 0 155px;
+    }
+</style>
+<div class="bgBd">
+    <div class="container-fluid p-0">
+        <div class="col  h-25 Bgheader">
+            <div style="height:150px; color:rebeccapurple"></div>
+        </div>
+        <div class="position-relative">
+            <div class="d-flex gap-3 position-absolute justify-content-start align-items-end w-100" style="top:-40px;right:20px">
+                <div class="position-relative rounded-circle overflow-hidden" style="width:150px !important;height:150px !important;">
+                    <img class="position-absolute top-0 start-0 w-100 h-100" style="object-fit:cover !important;" src="@Model.user.Photo" />
+                </div>
+                <div class="d-flex flex-column gap-2">
+                    <h4 class="m-0" style="color:#632189;">إعداداتي</h4>
+                    <h5 class="m-0 ">@User.FindFirstValue("FirstName")  @User.FindFirstValue("LastName")</h5>
+                    <h6 class="m-0 ">@User.FindFirstValue(ClaimTypes.Name)</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid px-lg-3" style="padding-top:150px">
+        <div class="row">
+            <div class="col">
+                <div class="tab px-3">
+                    <button class="tablinks  btn active" onclick="openTab(event, 'information-profile')" id="info-profile">تفاصيل البروفايل</button>
+                    <button class="tablinks btn" onclick="openTab(event, 'Password')">كلمة المرور</button>
+                    <button class="tablinks btn" onclick="openTab(event, 'Notifaction')">
+                        الاشعارات
+                        <span class=" badge rounded-pill" style="background-color:#A566C8 !important;">@(Model.List.Today.Count + Model.List.yesterday.Count + Model.List.Other.Count)</span>
+                    </button>
+                </div>
+
+                <div id="information-profile" class="tabcontent d-block">
+                    <h4>تفاصيلي ومعلوماتي الشخصية</h4>
+                    <p>من فضلك ادخل بياناتك الجديدة .</p>
+                    <form enctype="multipart/form-data" asp-page-handler="UpdateProfile" method="post" class="form theme-form">
+                        <input hidden asp-for="user.Id" class="form-control">
+
+                        <div class="row m-4 mx-1">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="fw-bold me-2" asp-for="user.Fname">   </label>
+                                    <input class="form-control" asp-for="user.Fname" placeholder="ادخل الاسم الاول">
+                                    <span asp-validation-for="user.Fname" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="user.Lname" class="fw-bold me-2">  </label>
+                                    <input asp-for="user.Lname" class="form-control" placeholder="ادخل الاسم الأخير">
+                                    <span asp-validation-for="user.Lname" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="user.Email" class="fw-bold me-2">  </label>
+                                    <input readonly asp-for="user.Email" class="form-control">
+                                    <span asp-validation-for="user.Email" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="user.PhoneNumber" class="fw-bold me-2">  </label>
+                                    <input asp-for="user.PhoneNumber" class="form-control" placeholder="ادخل رقم الهاتف ">
+                                    <span asp-validation-for="user.PhoneNumber" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label asp-for="user.Specialization" class="fw-bold me-2"></label>
+                                    <select asp-for="user.Specialization" class="form-control  ">
+                                        <option value="-1"> اختر التخصص </option>
+                                        <option value="اخصائي تغذية"> اخصائي تغذية  </option>
+                                        <option value="مدرب لياقة"> مدرب لياقة  </option>
+                                        <option value="مدرب كارديو"> مدرب كارديو  </option>
+                                        <option value="مدرب قوة"> مدرب قوة   </option>
+                                    </select>
+                                    <span asp-validation-for="user.Specialization" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label asp-for="user.DateOfBirth" class="fw-bold me-2"> </label>
+                                    <input asp-for="user.DateOfBirth" class="form-control" placeholder=" ادخل تاريخ الميلاد ">
+                                    <span asp-validation-for="user.DateOfBirth" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label asp-for="user.Height" class="fw-bold me-2">الطول</label>
+                                    <input type="number" class="form-control" asp-for="user.Height" placeholder=" ادخل الطول ">
+                                    <span asp-validation-for="user.Height" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label asp-for="user.Wieght" class="fw-bold me-2">الوزن</label>
+                                    <input asp-for="user.Wieght" type="number" class="form-control" placeholder=" ادخل الوزن ">
+                                    <span asp-validation-for="user.Wieght" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn  mb-3 text-white" style="background-color:#a566c8">حفظ التعديلات</button>
+                    </form>
+                </div>
+                <div id="Password" class="tabcontent  d-none">
+                    <h4>كلمة المرور</h4>
+                    <p>من فضلك ادخل كلمة المرور الحالية لنغيير كلمة المرور الخاص بك.</p>
+                    <hr />
+                    <form asp-page-handler="ChangePassword" enctype="multipart/form-data" method="post" class="form theme-form">
+                        <div class="row my-4">
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label class="fw-bold me-2" asp-for="model.CurrentPassword">كلمة المرور الحالية </label>
+                                    <div class="col-md-3">
+                                        <input asp-for="model.CurrentPassword" class="form-control mx-md-3" placeholder="ادخل كلمة المرور الحالية">
+                                        <span asp-validation-for="model.CurrentPassword" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label asp-for="model.Password" class="fw-bold me-2">كلمة المرور الجديدة </label>
+                                    <div class="col-md-3">
+                                        <input asp-for="model.Password" class="form-control mx-md-3" placeholder="ادخل كلمة المرور الجديدة">
+                                        <span asp-validation-for="model.Password" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label asp-for="model.CurrentPassword" class="fw-bold me-2">تاكيد كلمة المرور الجديدة</label>
+                                    <div class="col-md-3">
+                                        <input asp-for="model.ConfirmPassword" class="form-control mx-md-3" placeholder="تاكيد كلمة المرور الجديدة">
+                                        <span asp-validation-for="model.ConfirmPassword" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn  mb-3 text-white" style="background-color:#a566c8">حفظ التعديلات</button>
+
+                    </form>
+                </div>
+
+
+                <div id="Notifaction" class="tabcontent d-none">
+                    <h4>الاشعارات</h4>
+                    <section>
+                        <div class="h-100">
+                        </div>
+                        <div class="container">
+
+                            <div class="dropdown-divider"></div>
+                            <div class="">
+
+                                @if (!Model.List.Today.Any() && !Model.List.yesterday.Any() && !Model.List.Other.Any())
+                                {
+                                    <p class="text-danger"> لا يوجد اشعارات</p>
+                                }
+                                else
+                                {
+                                    <div class="row  shadow-sm" style="border: 1px #F4F4F4 solid; border-radius:30px">
+                                        <div class="py-3 text-center" style="border: 1px #F4F4F4 solid; border-radius:30px 30px 0px 0px ;background-color:#f4f4f4" class="p-3">
+                                            <div class="float-end me-3 txt fs-4">الاشعارات</div>
+                                            <div class="float-start ms-3"> <i class='bx bx-dots-vertical-rounded fs-3'></i></div>
+
+                                        </div>
+                                        <div class="col mt-3">
+
+                                            @await Html.PartialAsync("_Notification",Model.List)
+
+
+
+                                        </div>
+                                        <div class="col-4 d-none d-lg-block my-auto mx-auto">
+                                            <img src="~/Images/Notification .png" width="400" height="350" style="display:inline-block; padding-left:3rem" />
+                                        </div>
+                                    </div>
+
+
+                                }
+
+                            </div>
+                            <div class="dropdown-divider"></div>
+
+
+
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+    </script>
+
+    <script>
+        window.onload = function () {
+            document.getElementById("info-profile").classList.add("active");
+            //document.querySelector(".active").style.borderBottom = "2px solid #A566C8";
+            //document.querySelector(".active").style.paddingBottom = "4px";
+        }
+        function openTab(evt, TabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                if (tabcontent[i].id !== TabName) {
+                    tabcontent[i].classList.add("d-none");
+                    tabcontent[i].classList.remove("d-block");
+
+                }
+                else {
+
+                    tabcontent[i].classList.add("d-block");
+                    tabcontent[i].classList.remove("d-none");
+                }
+                console.log(tabcontent[i]);
+                console.log(evt);
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+
+            evt.currentTarget.classList.add("active");
+        }
+
+    </script>
+}
+
+

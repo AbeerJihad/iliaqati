@@ -1,0 +1,388 @@
+﻿@page
+@model liaqati_master.Pages.HealthyReicpe.IndexHealthyModel
+@{
+    ViewData["Title"] = "قائمة  الوصفات الصحية";
+    ViewData["LinkName"] = "HealthyReicpes";
+
+    var parms = new Dictionary<string, string>
+    {
+        {nameof(Model.HealthyRecipeQueryParamters.CurPage),Model.HealthyRecipeQueryParamters.CurPage.ToString()},
+        {nameof(Model.HealthyRecipeQueryParamters.SortBy),Model.HealthyRecipeQueryParamters.SortBy},
+        {nameof(Model.HealthyRecipeQueryParamters.SortOrder),Model.HealthyRecipeQueryParamters.SortOrder},
+        {nameof(Model.HealthyRecipeQueryParamters.SearchTearm),Model.HealthyRecipeQueryParamters.SearchTearm??""},
+        {nameof(Model.HealthyRecipeQueryParamters.Title),Model.HealthyRecipeQueryParamters.Title??""},
+        {nameof(Model.HealthyRecipeQueryParamters.Size),Model.HealthyRecipeQueryParamters.Size.ToString()},
+    };
+    if (Model.HealthyRecipeQueryParamters.MealType is not null)
+    {
+        parms.Add(nameof(Model.MealTypeParams), string.Join(',', Model.HealthyRecipeQueryParamters.MealType).ToString());
+    }
+    if (Model.HealthyRecipeQueryParamters.DietaryType is not null)
+    {
+        parms.Add(nameof(Model.DietaryTypeParams), string.Join(',', Model.HealthyRecipeQueryParamters.DietaryType).ToString());
+    }
+    if (Model.HealthyRecipeQueryParamters.SortOrder == "asc")
+        parms["SortOrder"] = "desc";
+    else
+        parms["SortOrder"] = "asc";
+}
+@section Styles{
+    <link rel="stylesheet" type="text/css" href="~/assets/css/Tables.css" asp-append-version="true">
+    <link href="~/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <link href="~/lib/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/lib/select2-bootstrap-5-theme/select2-bootstrap-5-theme.rtl.min.css" rel="stylesheet" />
+    <style>
+        .img__box {
+            height: 100% !important;
+            width: auto !important;
+        }
+    </style>
+}
+<form method="get">
+    <div class="offcanvas offcanvas-end" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="staticBackdropLabel">تصفية</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body pb-5">
+            <div class="d-flex flex-column gap-3">
+
+                <div class=" py-2">
+                    <label class="form-label">بحث عام</label>
+
+                    <input class="form-control " asp-for="@Model.HealthyRecipeQueryParamters.SearchTearm" id="SearchTearm" name="SearchTearm" type="search" placeholder="بحث" aria-label="Search">
+                </div>
+                <div>
+                    <label class="form-label">اسم الوصفة </label>
+                    <select name="Title" class="form-select" asp-items="@Model.Titles" asp-for="@Model.HealthyRecipeQueryParamters.Title" id="single-select-field" data-placeholder="  حدد اسم الصنف" onchange="submit()">
+                        <option value="">  حدد اسم الوصفة</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="form-label">النوع الغذائي</label>
+                    <select name="DietaryType" class="form-select w-100" asp-items="@Model.DietaryType" asp-for="@Model.HealthyRecipeQueryParamters.DietaryType" id="multiple-select-DietaryType" data-placeholder="  حدد اسم الصنف" onchange="submit()" multiple>
+                        <option value="" disabled>  حدد النوع الغذائي</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="form-label">نوع الوجبة </label>
+                    <select name="MealType" class="form-select w-100" asp-items="@Model.MealType" asp-for="@Model. HealthyRecipeQueryParamters.MealType" id="multiple-select-MealType" data-placeholder="  حدد اسم الصنف" onchange="submit()" multiple>
+                        <option value="" disabled>  حدد نوع الوجبة</option>
+                    </select>
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-primary me-1" type="submit">إظهار النتائج</button>
+                    <button type="button" class="btn btn-primary-gradien" id="single-select-field-clear">إلغاء جميع الفلاتر</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <input type="hidden" name="CurPage" asp-for="@Model.HealthyRecipeQueryParamters.CurPage" />
+
+    <div class="container-lg ">
+        <div class=" ">
+            <div class="row ">
+                <div class="col-sm-12">
+                    <div class="card p-3 border-raduis">
+                        <div class="card-header bg-transparent px-0 py-4 ">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5>
+                                    @ViewData["Title"] <span style="color:#a566c8">(@Model.QueryPageResult.TotalCount)</span>
+                                </h5>
+                                <div>
+                                    <a class="btn   btn-air-primary btn-primary-gradien  shadow" asp-page="./Create">إضافة جديد<i class="bi bi-plus-circle-dotted ms-2"></i></a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2 flex-wrap gap-2">
+                            <div class="  gap-2">
+                                <button class="btn  btn-square btn-edit shadow" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+                                    <div class="d-flex justify-content-center  align-items-center  gap-2">
+                                        <span>
+                                            تصفية البيانات
+                                        </span>
+                                        <i class='bx bx-filter h4 m-0'></i>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class=" d-flex justify-content-end align-items-center gap-2">
+                                <p class="m-0 h5"> ترتيب حسب :</p>
+                                <div class="d-flex justify-content-center  align-items-center  gap-2">
+                                    <select name="SortBy" onchange="submit();" class="form-select " style="min-width:200px" asp-items="@Model.SortList" asp-for="@Model. HealthyRecipeQueryParamters.SortBy"></select>
+                                    <select name="SortOrder" onchange="submit();" class="form-select" asp-for="@Model. HealthyRecipeQueryParamters.SortOrder">
+                                        <option value="asc">أ-ي</option>
+                                        <option value="desc">ي-أ</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-2 flex-wrap gap-2 align-items-center">
+
+                            @if (Model.ListOfSelectedFilters is not null)
+                            {
+                                if (Model.ListOfSelectedFilters.Count > 0)
+                                {
+                                    <h5 class="m-0">الفلاتر المطبقة:</h5>
+                                    @foreach (var item in Model.ListOfSelectedFilters)
+                                    {
+                                        <a asp-all-route-data="parms" asp-route-key="@item.PropartyName" asp-route-value="@item.PropartyValue" class="btn btn-light btn-sm">
+                                            @item.PropartyValue
+                                            <i class="bi bi-x-lg"></i>
+                                        </a>
+                                    }
+                                }
+                            }
+
+
+
+                        </div>
+
+                        <div class="table-responsive table-hover">
+                            <table class="table  table-borderless" id="Tbl">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" width="50">
+                                        </th>
+                                        <th scope="col" width="50">
+                                            <input class="form-check-input " type="checkbox" id="chk-all" value="">
+                                        </th>
+                                        @if (User.HasClaim(c => c.Type == Database.Expert && c.Value == "true"))
+                                        {
+                                            <th scope="col" width="180"> المدرب</th>
+                                        }
+                                        <th scope="col" width="180">نوع الوجبة</th>
+                                        <th scope="col" width="180">سعر الوجبة</th>
+                                        <th scope="col" width="180">السعرات الحرارية</th>
+                                        <th scope="col" width="180"></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.QueryPageResult.ListOfData is not null)
+                                    {
+                                        if (Model.QueryPageResult.ListOfData.Count() > 0)
+                                        {
+                                            @foreach (var item in Model.QueryPageResult.ListOfData)
+                                            {
+
+                                                <tr class="main-row">
+                                                    <td>
+                                                        <button type="button" class="toggle-details btn btn-primary d-flex p-2">
+                                                            <i class="bx bx-show h5 m-0"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td scope="row">
+                                                        <label class="d-block">
+                                                            <input class="checkbox_animated" type="checkbox">
+                                                        </label>
+                                                    </td>
+                                                    @if (User.HasClaim(c => c.Type == Database.Expert && c.Value == "true"))
+                                                    {
+                                                        <td>@item.ExpertName</td>
+                                                    }
+                                                    <td>@item.MealType</td>
+                                                    <td>@item.Price?.ToString("c")</td>
+                                                    <td>@item.Calories</td>
+                                                    <td>
+                                                        <div class="d-flex gap-2">
+                                                            <a asp-page="Details" asp-route-id="@item.Id" class="btn"
+                                                               style="background-color: #8763b320; color:#3c077d;  padding: 0.375rem 0.75rem;"
+                                                               type="button">
+                                                                <i class="bi bi-eye"></i>
+                                                            </a>
+                                                            <a asp-page="Edit" asp-route-id="@item.Id" class="btn btn-square btn-edit" type="button">
+                                                                <div class="d-flex justify-content-end align-items-center gap-2"><span>تعديل</span><i class="bi bi-pencil-square"></i></div>
+                                                            </a>
+                                                            <form method="post" asp-page="Delete" asp-route-id="@item.Id">
+                                                                <a onclick="DeleteFun(this)" class="btn btn-square btn-delete">
+                                                                    <div class="d-flex justify-content-end align-items-center gap-2"><span>حذف</span><i class="bi bi-trash"></i></div>
+                                                                </a>
+                                                            </form>
+
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="sub-row">
+                                                    <td colspan="10">
+                                                        <div class="card mb-3">
+                                                            <div class="row w-100 g-0">
+                                                                <div class="col p-3">
+                                                                    <div class="img__box position-relative rounded-3 overflow-hidden h-100 p-3">
+                                                                        <img src=@item.Image
+                                                                             class="position-absolute top-0 start-0 w-100 h-100"
+                                                                             style="object-fit: cover"
+                                                                             alt="..." />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-10">
+                                                                    <div class="card-body">
+                                                                        <h5 class="card-title">@item.Title</h5>
+                                                                        <p class="card-text">
+                                                                            <span>النوع الغذائي: </span>
+                                                                            <span>@item.DietaryType</span>
+                                                                        </p>  <p class="card-text">
+                                                                            <span> نوع الوجبة: </span>
+                                                                            <span>@item.MealType</span>
+                                                                        </p>
+                                                                        <p class="card-text">
+                                                                            <span> تاريخ الإضافة:</span>
+                                                                            <span>@CommonMethods.GetArabicDateTime(item.CreatedDate)</span>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td colspan="7">
+                                                    <div class="d-flex justify-content-center align-items-center flex-column">
+                                                        <i class="bi bi-database-fill-slash text-secondary" style="font-size:120px"></i>
+                                                        <p>لا يوجد بيانات</p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="7">
+                                                <div class="d-flex justify-content-center align-items-center flex-column">
+                                                    <i class="bi bi-database-fill-slash text-secondary" style="font-size:120px"></i>
+                                                    <p>لا يوجد بيانات</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                                <tfoot>
+                                    <tr class="border-top bg-light">
+
+                                        <td colspan="10">
+                                            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                                <div>
+                                                    <span class="d-inline-block me-3 text-sm">
+                                                        الحقول من @Model.QueryPageResult.FirstRowOnPage إالى  @Model.QueryPageResult.LastRowOnPage من @Model.QueryPageResult.TotalCount
+                                                    </span>
+                                                </div>
+                                                @{
+                                                    var perv = Model.QueryPageResult.PreviousPage.HasValue ? "" : "disabled";
+                                                    var next = Model.QueryPageResult.NextPage.HasValue ? "" : "disabled";
+                                                    var first = (Model.HealthyRecipeQueryParamters.CurPage != 1 && Model.QueryPageResult.TotalPages != 0) ? "" : "disabled";
+                                                    var last = (Model.HealthyRecipeQueryParamters.CurPage != Model.QueryPageResult.TotalPages && Model.QueryPageResult.TotalPages != 0) ? "" : "disabled";
+                                                    var firstIndex = Math.Max(Model.HealthyRecipeQueryParamters.CurPage - 2, 1);
+                                                    var lastIndex = Math.Min(Model.HealthyRecipeQueryParamters.CurPage + 2, Model.QueryPageResult.TotalPages);
+                                                }
+                                                <div class="d-flex gap-2 justify-content-center align-items-center ">
+
+
+                                                    <div class="d-flex justify-content-center gap-2 align-items-center">
+                                                        <label asp-for="@Model. HealthyRecipeQueryParamters.Size" class="text-sm m-0">عدد الصفوف لكل صفحة</label>
+                                                        <select name="Size" class="form-select text-sm w-auto" asp-items="@Model.lstPageSize" asp-for="@Model.HealthyRecipeQueryParamters.Size" onchange="submit()">
+                                                        </select>
+                                                    </div>
+                                                    <nav aria-label="Page navigation example ">
+                                                        <ul class="pagination  justify-content-end ">
+                                                            @{
+                                                                parms["CurPage"] = "1" ?? "";
+                                                            }
+                                                            <li class="page-item"><a class="page-link @perv" asp-all-route-data="parms" asp-route-key="" asp-route-value=""><i class='bx bxs-chevrons-right'></i></a></li>
+                                                            @{
+                                                                parms["CurPage"] = Model.QueryPageResult.PreviousPage.ToString() ?? "";
+                                                            }
+                                                            <li class="page-item"><a class="page-link @perv" asp-all-route-data="parms" asp-route-key="" asp-route-value=""><i class='bx bxs-chevron-right'></i></a></li>
+                                                            <li class="page-item">
+                                                                <a class="page-link active">
+                                                                    <p class="d-flex justify-content-center gap-3  align-items-center  m-0  text-sm">
+                                                                        <span>  @Model.HealthyRecipeQueryParamters.CurPage</span> من  <span>@Model.QueryPageResult.TotalPages</span>
+                                                                    </p>
+                                                                </a>
+                                                            </li>
+                                                            @{
+                                                                parms["CurPage"] = Model.QueryPageResult.NextPage.ToString() ?? "";
+                                                            }
+                                                            <li class="page-item"><a class="page-link @next" asp-all-route-data="parms" asp-route-key="" asp-route-value=""><i class='bx bxs-chevron-left'></i></a></li>
+                                                            @{
+                                                                parms["CurPage"] = Model.QueryPageResult.TotalPages.ToString() ?? "";
+                                                            }
+                                                            <li class="page-item"><a class="page-link @next" asp-all-route-data="parms" asp-route-key="" asp-route-value=""><i class='bx bxs-chevrons-left'></i></a></li>
+                                                        </ul>
+                                                    </nav>
+
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <partial name="_Manage__data" />
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <partial name="_ConfirmDeleteModel" />
+        <partial name="_ImageViewer" />
+
+    </div>
+
+
+
+</form>
+
+
+@section Scripts{
+    <script src="~/javascript/table.js" asp-append-version="true"></script>
+    <script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
+    <script src="~/javascript/script.js" asp-append-version="true"></script>
+    <script src="~/lib/select2/js/select2.full.min.js"></script>
+    <script>
+        $('#multiple-select-MealType').select2({ theme: "bootstrap-5", width: '100%', placeholder: $(this).data('placeholder'), closeOnSelect: false, });
+        $('#multiple-select-DietaryType').select2({ theme: "bootstrap-5", width: '100%', placeholder: $(this).data('placeholder'), closeOnSelect: false, });
+        $('#single-select-field').select2({ theme: "bootstrap-5", width: '100%', placeholder: $(this).data('placeholder'), });
+        $("#single-select-field-clear").on("click", function () {
+            $('#single-select-field').val(null).trigger("change");
+            $('#multiple-select-DietaryType').val(null).trigger("change");
+            $('#multiple-select-MealType').val(null).trigger("change");
+        });
+    </script>
+    <script>
+        let btnToggleDetails = document.querySelectorAll(".toggle-details");
+        btnToggleDetails.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                Show(btn);
+            });
+        });
+
+        function Show(btn) {
+            btn.parentElement.parentElement.nextElementSibling.classList.toggle(
+                "show"
+            );
+            btn.classList.toggle("active");
+            btn.querySelector("i").classList.toggle("bx-show");
+            btn.querySelector("i").classList.toggle("bx-hide");
+        }
+    </script>
+  }
+
+
+
+
+
+
+

@@ -1,0 +1,298 @@
+﻿@page
+@model liaqati_master.Pages.Exercises.IndexModel
+@{
+
+
+}
+@section Styles{
+    <link href="~/lib/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+    <style>
+        body {
+            background-color: #F7F7F7;
+        }
+
+        .btn_Exercises_duration {
+            background-color: #b9aff5;
+        }
+
+        .Exercises_duration_Color {
+            color: #d8d3f9;
+        }
+
+        .pointer {
+            cursor: pointer;
+        }
+
+        hr {
+            color: #d3d3d3;
+        }
+
+        #divFilter .filter::-webkit-scrollbar {
+            width: 10px;
+            background-color: #00000010;
+            border-radius: 10px;
+        }
+
+        #divFilter .filter::-webkit-scrollbar-thumb {
+            width: 10px;
+            background-color: #00000050;
+            border-radius: 10px;
+        }
+    </style>
+    <link href="~/user/css/filter.css" rel="stylesheet" asp-append-version="true" />
+
+}
+<div>
+    <div class="position-relative w-100  overflow-hidden" style=" height: 70vh;background-image: linear-gradient(#00000060, #00000060),url(/images/Exercise/strong-man-training-gym.png)">
+
+        <div class="h-100">
+            <div class="container-fluid h-100 p-0 position-absolute start-0 top-0 ">
+                <div class="container-xl h-100  d-flex flex-column justify-content-center align-items-center " style="padding-top:120px !important">
+                    <div class="w-100">
+                        <h1 class="text-white text-center py-3 fw-bold">
+                            التمارين الرياضية
+                        </h1>
+                        <form id="formSearch" class="p-0 g-0 row col-lg-10 mx-auto form-search justify-content-center">
+                            <div class="col-12 my-2 my-lg-0 col-lg-6">
+                                <input type="text" id="searchTearm" class="form-control search rounded-0" placeholder="ابحث" style="height: 3rem" />
+                            </div>
+                            <div class="col-12 my-lg-0 col-lg-2">
+                                <input placeholder="بحث" type="submit" value="بحث" class="form-control text-center rounded-0" style="background-color: #cebfe9; height: 3rem;" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid p-0">
+
+        <form id="form1" class="p-0">
+            <div class="container-fluid bg-white p-0 m-0 ">
+                <p class="fs-6 p-3">
+                    الرئيسية
+                    <img src="/images/Exercise/ic_expand_more_24px.png" />
+                    خدماتنا
+                    <img src="/images/Exercise/ic_expand_more_24px.png" />
+                    تمارين رياضية
+                </p>
+                <div class="container-fluid p-0 border">
+                    <div class="container-xl p-0 d-flex justify-content-between">
+                        <button title="toggle" type="button" class="btn bg-white main-color border rounded-0 p-3 px-3 d-flex justify-content-center align-items-center" id="btnToggleFilter">
+                            <i class="bx bx-filter h5 m-0 me-2"></i>
+                            تصفية
+                        </button>
+
+                        <div class="col-6 col-md-2 d-flex">
+                            <select class="form-select" asp-items="Model.SortList" id="lstSort" name="SortBy" asp-for="@Model.queryParameters.SortBy">
+                                <option value="" selected>ترتيب حسب</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="container-fluid position-relative d-none content-filter m-0 p-0">
+                    <!-- <div class="backdrop d-none position-fixed w-100 top-0 start-0  min-vh-100 "></div> -->
+                    <div class="filter d-none">
+                        <div class="filter-mobile-head d-lg-none d-flex p-3 justify-content-between align-items-center border-bottom">
+                            <h5 class="">تصفية</h5>
+                            <button class="btn btn-sm btn-primary">إلغاء جميع الفلاتر</button>
+                            <span class="filter-close p-2">
+                                <i class="bi bi-x-lg h5"></i>
+                            </span>
+                        </div>
+                        <div class="p-lg-3 d-flex align-items-lg-start g-0 bg-white filter-container pb-5 shadow flex-column flex-lg-row">
+                            <div class="p-3 d-flex align-items-lg-start">
+                                <div class="w-100">
+                                    <p class="mb-0 d-flex align-items-center justify-content-between filter-header">
+                                        <strong>تركيز الجسم</strong>
+                                        <i class="bi bi-chevron-down d-lg-none"></i>
+                                    </p>
+                                    <div class="filter-level d-none d-lg-block">
+                                        @{
+                                            int Counter = 1;
+                                        }
+                                        @foreach (string bdoyfocusitem in Model.BodyFoucs)
+                                        {
+                                            string id = $"BodyFoucs{Counter}";
+
+                                            <div class="form-check my-3">
+                                                <input class="form-check-input" id="@id" name="bodyfocus" type="checkbox" value="@bdoyfocusitem">
+                                                <label class="form-check-label" for="@id">
+                                                    @bdoyfocusitem
+                                                    <span class="count"></span>
+                                                </label>
+                                            </div>
+                                            Counter++;
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3 d-flex align-items-lg-start">
+                                <div class="w-100 h-100">
+                                    <p class="mb-0 d-flex align-items-center justify-content-between filter-header">
+                                        <strong>نوع التدريب</strong>
+                                        <i class="bi bi-chevron-down d-lg-none"></i>
+                                    </p>
+                                    <div class="filter-level d-none py-3 d-lg-block h-100">
+                                        <div class="h-100 scroll">
+
+                                            @{
+                                                Counter = 1;
+                                            }
+                                            @foreach (string bdoyfocusitem in Model.TraningType)
+                                            {
+                                                string id = $"TraningType{Counter}";
+
+                                                <div class=" form-check my-3 ">
+                                                    <input class="form-check-input" id="@id" name="traningtype" type="checkbox" value="@bdoyfocusitem">
+                                                    <label class="form-check-label" for="@id">
+                                                        @bdoyfocusitem
+                                                        <span class="count"></span>
+
+                                                    </label>
+                                                </div>
+                                                Counter++;
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="p-3 d-flex align-items-lg-start">
+                                <div class="w-100">
+                                    <p class="mb-0 d-flex align-items-center justify-content-between filter-header">
+                                        <strong>الصعوبة</strong>
+                                        <i class="bi bi-chevron-down d-lg-none"></i>
+                                    </p>
+                                    <div class="filter-level d-none d-lg-block">
+                                        @{
+                                            Counter = 1;
+                                        }
+                                        @foreach (string DifficultyItem in Model.Difficulty)
+                                        {
+                                            string id = $"Difficulty{Counter}";
+
+                                            <div class="form-check my-3">
+                                                <input class="form-check-input" id="@id" name="difficulty" type="checkbox" value="@DifficultyItem">
+                                                <label class="form-check-label" for="@id">
+                                                    @DifficultyItem
+                                                    <span class="count"></span>
+
+                                                </label>
+                                            </div>
+                                            Counter++;
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3 d-flex align-items-lg-start">
+                                <div class="w-100 h-100">
+                                    <p class="mb-0 d-flex align-items-center justify-content-between filter-header">
+                                        <strong>المعدات</strong>
+                                        <i class="bi bi-chevron-down d-lg-none"></i>
+                                    </p>
+                                    <div class="filter-level d-none py-3 d-lg-block h-100">
+                                        <div class="h-100 scroll">
+
+
+
+
+                                            @{
+                                                Counter = 1;
+                                            }
+                                            @foreach (string bdoyfocusitem in Model.Equipment)
+                                            {
+                                                string id = $"Equipment{Counter}";
+
+                                                <div class="form-check my-3">
+                                                    <input class="form-check-input" id="@id" name="equipment" type="checkbox" value="@bdoyfocusitem">
+                                                    <label class="form-check-label" for="@id">
+                                                        @bdoyfocusitem
+                                                        <span class="count"></span>
+
+                                                    </label>
+                                                </div>
+                                                Counter++;
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3 d-flex align-items-lg-start">
+                                <div class="w-100">
+                                    <div class="row g-0 mb-2">
+                                        <p class="mb-0 d-flex align-items-center justify-content-between filter-header">
+                                            <strong> مدة التمرين</strong>
+                                            <i class="bi bi-chevron-down d-lg-none"></i>
+                                        </p>
+                                        <div class="filter-level d-none d-lg-block">
+                                            <span class="text-secondary mb-1 small">دقائق</span>
+                                            <div class="d-flex gap-2 justify-content-center align-items-center">
+                                                <input class="col form-control me-1" id="Minduration" type="number" onkeyup="mindurFun()" placeholder="Min">
+                                                <span>-</span>
+                                                <input class="col form-control" id="Maxduration" type="number" onkeyup="maxdurFun()" placeholder="Max">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-3 d-flex align-items-lg-start">
+                                <div class="w-100">
+                                    <div class="row g-0 mb-2">
+                                        <p class="mb-0 d-flex align-items-center justify-content-between filter-header">
+                                            <strong>حرق السعرات الحرارية</strong>
+                                            <i class="bi bi-chevron-down d-lg-none"></i>
+                                        </p>
+                                        <div class="filter-level d-none d-lg-block">
+                                            <span class="text-secondary mb-1 small">
+                                                السعرات الحرارية
+                                            </span>
+                                            <div class="d-flex gap-2 justify-content-center align-items-center">
+                                                <input class="col form-control me-1" id="MinCalorieBurn" type="number" placeholder="Min">
+                                                <span>-</span>
+                                                <input class="col form-control" id="MaxCalorieBurn" type="number" placeholder="Max">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+
+        <div class="container-lg ">
+            <div id="rowExercisesIndex" class="row justify-content-center">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container-lg mt-3">
+    <div class="d-flex  justify-content-center align-items-center  g-0" id="NoResult">
+    </div>
+
+    <div class="row p-0 g-0" id="Paging">
+        <div class="col p-3 d-flex justify-content-center align-items-center"></div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+    <script src="~/User/js/Filter.js" asp-append-version="true"></script>
+    <script src="~/jsapi/Pagination.js" asp-append-version="true"></script>
+    <script src="~/jsapi/ExerciseApi.js" asp-append-version="true"></script>
+    <script src="~/JavaScript/Exercies.js" asp-append-version="true"></script>
+
+    }

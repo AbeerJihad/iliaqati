@@ -1,0 +1,249 @@
+﻿@page
+@model liaqati_master.Areas.Admin.Pages.Exercises.EditExerciseModel
+@{
+    ViewData["Title"] = "إضافة إنجاز";
+    ViewData["LinkName"] = "Categories";
+}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="pb-3">@ViewData["Title"]</h3>
+                    <form enctype="multipart/form-data" method="post" class="form theme-form">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <input asp-for="Exercise.Id">
+                        <div class="row">
+                            <div class="col">
+                                <div class="mb-3">
+                                    <label asp-for="Exercise.Title"></label>
+                                    <input asp-for="Exercise.Title" class="form-control" placeholder="">
+                                    <span asp-validation-for="Exercise.Title" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="mb-3 row  d-flex flex-row align-items-center justify-content-start mb-0">
+                                <label class="col mb-0" asp-for="Exercise.TraningType"></label>
+                                <div class="col-sm-11">
+                                    <div class="m-checkbox-inline d-flex flex-wrap">
+                                        @for (int i = 0; i < Model.TraningTypeStatusList.Count; i++)
+                                        {
+                                            <div class=" ">
+                                                <input type="hidden" class="" asp-for="@Model.TraningTypeStatusList[i].Value" />
+
+                                                <input type="checkbox" class="checkbox_animated" asp-for="@Model.TraningTypeStatusList[i].Selected" />
+                                                <label class="form-check-label p">
+                                                    @Model.TraningTypeStatusList[i].Text
+                                                </label>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                                <span asp-validation-for="Exercise.TraningType" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 row  d-flex flex-row align-items-center justify-content-start mb-0">
+                                <label class="col mb-0" asp-for="Exercise.BodyFocus"></label>
+                                <div class="col-sm-11">
+                                    <div class="m-checkbox-inline d-flex flex-wrap">
+                                        @for (int i = 0; i < Model.BodyFocusStatusList.Count; i++)
+                                        {
+                                            <div class=" ">
+                                                <input type="hidden" class="" asp-for="@Model.BodyFocusStatusList[i].Value" />
+
+                                                <input type="checkbox" class="checkbox_animated" asp-for="@Model.BodyFocusStatusList[i].Selected" />
+                                                <label class="form-check-label p">
+                                                    @Model.BodyFocusStatusList[i].Text
+                                                </label>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                                <span asp-validation-for="Exercise.BodyFocus" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 row  d-flex flex-row align-items-center justify-content-start mb-0">
+                                <label class="col mb-0" asp-for="Exercise.Difficulty"></label>
+                                <div class="col-sm-11">
+                                    <div class="m-checkbox-inline d-flex flex-wrap">
+                                        @for (int i = 0; i < Model.DifficultyStatusList.Count; i++)
+                                        {
+                                            <div class=" ">
+
+
+                                                <input type="radio" class="form-check-input" asp-for="@Model.DifficultyStatus" value="@Model.DifficultyStatusList[i].Value" />
+                                                <label class="form-check-label p">
+                                                    @Model.DifficultyStatusList[i].Text
+                                                </label>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                                <span asp-validation-for="Exercise.Difficulty" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 row  d-flex flex-row align-items-center justify-content-start mb-0">
+                                <label class="col mb-0" asp-for="Exercise.Equipments"></label>
+                                <div class="col-sm-11">
+                                    <div class="m-checkbox-inline d-flex flex-wrap">
+                                        @for (int i = 0; i < Model.EquipmentsTypeStatusList.Count; i++)
+                                        {
+                                            <div class=" ">
+                                                <input type="hidden" class="" asp-for="@Model.EquipmentsTypeStatusList[i].Value" />
+
+                                                <input type="checkbox" class="checkbox_animated" asp-for="@Model.EquipmentsTypeStatusList[i].Selected" />
+                                                <label class="form-check-label p">
+                                                    @Model.EquipmentsTypeStatusList[i].Text
+                                                </label>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                                <span asp-validation-for="Exercise.Equipments" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label asp-for="Exercise.Price"></label>
+                                    <input asp-for="Exercise.Price" class="form-control" placeholder="">
+                                    <span asp-validation-for="Exercise.Price" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label asp-for="Exercise.Duration"></label>
+                                    <input asp-for="Exercise.Duration" class="form-control" placeholder="">
+                                    <span asp-validation-for="Exercise.Duration" class="text-danger"></span>
+
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label asp-for="Images"></label>
+                                    <input asp-for="Images" class="form-control" placeholder="" accept="image/*">
+                                    <span asp-validation-for="Images" class="text-danger"></span>
+
+                                </div>
+                                <div class="mb-3">
+                                    <h5 class="h5 my-2 fw-bold">مستعرض الصور</h5>
+                                    <div class="images-viewer d-flex  gap-4 flex-wrap p-4 border bg-light w-100" style="min-height:120px;" id="imagesViewer">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="progress mb-3" role="progressbar" aria-label="Basic example" aria-valuenow="0" id="progress" aria-valuemin="0" aria-valuemax="100">
+                                    <div class="progress-bar" style="background:#a566c8;" id="progressbar"></div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label asp-for="Video"></label>
+                                    <input asp-for="Video" class="form-control" placeholder="" accept="video/*">
+                                    <span asp-validation-for="Video" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3" id="video">
+                                    <video width="320" height="240" controls>
+                                        <source src="" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label asp-for="Exercise.Detail"></label>
+                                    <textarea asp-for="Exercise.Detail" class="form-control rich-editor" placeholder=""></textarea>
+                                    <span asp-validation-for="Exercise.Detail" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end ">
+                            <div class="col-sm-4 justify-content-end d-flex">
+                                <div class="mb-3">
+                                    <button class="btn-primary btn  mx-auto col-auto" type="submit"> حقظ التعديلات <i class="bi bi-plus-square-dotted"></i> </button>
+                                    <a class="btn-danger btn  mx-auto col-auto" asp-page="./Index"> الغاء <i class="bi bi-arrow-90deg-down"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="~/javascript/uploadfiles.js" asp-append-version="true"></script>
+    <script src="~/javascript/richtexteditor.js" asp-append-version="true"></script>
+    @{
+
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        let input = document.getElementById('Video');
+        let video = document.querySelector('video');
+        let videoSource = document.createElement('source');
+        let progress = document.getElementById('progress');
+        let progressbar = document.getElementById('progressbar');
+
+        input.addEventListener('change', function () {
+            progressbar.style.width = 0;
+            console.log(progressbar)
+            const files = this.files || [];
+
+            if (!files.length) return;
+
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                videoSource.setAttribute('src', e.target.result);
+                video.appendChild(videoSource);
+                video.load();
+                video.play();
+            };
+
+            reader.onprogress = function (e) {
+                console.log('progress: ', Math.round((e.loaded * 100) / e.total));
+                var width = Math.round((e.loaded * 100) / e.total);
+                progressbar.style.width = width + '%';
+                progress.setAttribute("aria-valuenow", width)
+            };
+
+            reader.readAsDataURL(files[0]);
+        });
+
+
+        let imags = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.imagepath));
+        let videosrc = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.videopath));
+        videoSource.setAttribute('src', videosrc);
+        video.appendChild(videoSource);
+        video.load();
+        if (imags)
+            RenderImages(imags)
+
+
+        function RenderImages(imageUrl, fileName = null) {
+            var imageCard = document.createElement('div');
+            imageCard.className = "position-relative rounded-3 bg-white";
+            imageCard.style.width = '150px';
+            imageCard.style.height = '150px';
+            if (fileName == null) {
+                imageCard.innerHTML += `<div class="position-absolute rounded " style="inset:20px;"><img src="${imageUrl}" class="w-100 h-100" style="inset:5em;object-fit:cover" /></div>`
+            } else {
+                imageCard.innerHTML += `<div class="position-absolute rounded " style="inset:20px;"><img src="${imageUrl}" class="w-100 h-100" style="inset:5em;object-fit:cover" /></div><button class="btn d-flex align-items-center  justify-content-center shadow  p-0 bg-white rounded-circle position-absolute delete-btn" type="button" onclick="DeleteFile('${fileName}');"> <i class="bi bi-x"></i></button>`
+
+            }
+            imagesViewer.appendChild(imageCard)
+        }
+    </script>
+
+
+
+}

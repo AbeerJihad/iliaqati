@@ -1,0 +1,134 @@
+﻿@page
+@model liaqati_master.Pages.ContactUs.IndexModel
+@{
+}
+
+@section Styles{
+    <style>
+        .contact-page .main-color {
+            background-color: #a666c7;
+        }
+
+        .contact-page .header {
+            height: 300px;
+            background-image: url("/user/images/BG\ C.jpeg");
+            background-size: cover;
+        }
+
+        .contact-page .page-title {
+            font-size: 3rem;
+        }
+
+        .contact input.form-control,
+        .contact .nice-select {
+            height: 50px;
+            border: none;
+        }
+
+        .contact textarea, .contact .form-select {
+            border: none;
+        }
+
+        .contact-page .nice-select {
+            margin: 0;
+            border-radius: 0;
+            border-top-left-radius: 24px;
+            border-bottom-left-radius: 24px;
+            box-shadow: 0 0.125rem 0.25rem rgba(var(--bs-body-color-rgb), 0.075) !important;
+        }
+
+        body {
+            background-color: #fafafa;
+        }
+
+        .contact-page .line {
+            background-color: #a666c7;
+            border-radius: 10px;
+            height: 5px;
+            width: 150px;
+        }
+    </style>
+}
+<div class="contact-page">
+
+    <div class="header  d-flex justify-content-center align-items-center  pt-5">
+        <h1 class="fw-medium text-center text-white page-title">تواصل معنا</h1>
+    </div>
+    <div class="container-fluid p-0 ">
+        <div class="container-md mx-auto p-0">
+            <div class="p-2">
+                <h2 class="text-capitalize text-center my-3">
+                    جاهزين لمساعدتك فى أي شيء وأي وقت
+                </h2>
+                <div class="row flex-column-reverse flex-lg-row row-cols-1 row-cols-lg-2 justify-content-center align-items-center">
+                    <div class="col my-4">
+                        <div class="d-flex justify-content-center align-items-center flex-column">
+                            <div class="line"></div>
+                            <h2 class="text-center my-2">أرسل رسالة</h2>
+                        </div>
+                        <form class="form-card px-lg-5 contact">
+                            <div class="form-group my-3 d-flex">
+                                <input class="rounded-pill shadow-sm form-control w-100"
+                                       placeholder="الاسم الكامل" />
+                            </div>
+                            <div class="form-group my-3 d-flex">
+                                <input class="rounded-pill shadow-sm form-control w-100"
+                                       placeholder="عنوان البريد الإلكتروني" />
+                            </div>
+                            <div class="form-group my-3 d-flex justify-content-center">
+                                <input class="rounded-pill m-0 shadow-sm form-control w-100"
+                                       placeholder="رقم الإتصال" style="border-end-end-radius:0 !important;border-start-end-radius:0 !important;" />
+                                <select class="form-select rounded-pill  m-0 shadow-sm  w-auto" id="MySelect" style="border-start-start-radius:0 !important;border-end-start-radius:0 !important;">
+                                    <option value="059">059</option>
+                                    <option value="056">056</option>
+                                </select>
+                            </div>
+                            <div class="form-group my-3 d-flex">
+                                <textarea class="rounded-4 form-control shadow-sm w-100"
+                                          placeholder="محتوى الرسالة"
+                                          rows="7"
+                                          cols="50"></textarea>
+                            </div>
+                            <div class="form-group my-3 d-flex justify-content-center">
+                                <input type="submit"
+                                       value="أرسل"
+                                       class="rounded-pill text-white main-color form-control shadow-sm w-75" style="font-size:24px;"
+                                       cols="50" />
+                            </div>
+                            <ul class="nav d-flex justify-content-center">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark">
+                                        <i class="bi bi-whatsapp h3"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">
+                                        <i class="bi bi-facebook h3"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">
+                                        <i class="bi bi-instagram h3"></i>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" href="#">
+                                        <i class="bi bi-twitter h3"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex justify-content-center align-items-center p-4">
+                            <img src="~/Images/ContactUsImage.png" class="img-fluid" alt="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

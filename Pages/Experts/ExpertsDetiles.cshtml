@@ -1,0 +1,393 @@
+﻿@page "{id}"
+@model liaqati_master.Pages.Experts.ExpertsDetilesModel
+@{
+}
+
+<link rel="stylesheet" type="text/css" href="~/assets/css/Tables.css" asp-append-version="true">
+
+ <style>
+        *{
+           font-family: Almarai;
+
+        }
+        .colorbg {
+            background-color: #E7CAF0;
+        }
+
+    .bgcolor {
+        background-color: #ffffff8a;
+    }
+        .bglight {
+            background-color: #F7F7F7;
+        }
+        .bg {
+            color: #C272F1;
+        }
+        .colr{
+            background-color:#CCA6E3 !important;
+        }
+        
+    .imgHeader {
+        background-image: url('/user/images/consultation/Mask Group 52.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        background-attachment: scroll;
+        background-position: center;
+    }
+ </style>
+
+<div class="container-fluid imgHeader position-relative">
+    <div class="row ">
+        <div class="p-5">
+            <h1 class="text-white fw-bolder text-center mt-2 pt-5">خبير لياقتي </h1>
+        </div>
+    
+    </div>
+
+
+</div>
+
+<div class="container-xl my-5 ">
+    <div class="row my-5 d-flex p-3 align-content-center  bglight justify-content-evenly">
+        <div class="col-auto bg-white rounded-pill shadow p-3">
+            <img height="300" width="300" class=" rounded-pill" src="@Model.User.Photo" />
+        </div>
+        <div class="col-6 my-auto">
+            <h2>أ. @Model.User.Fname  @Model.User.Lname</h2>
+            <h4>@Model.User.Specialization</h4>
+            <div class="d-flex">
+                @if (Model.User.WhatsApp is not null)
+                {
+                    <a href="@Model.User.WhatsApp" data-action class="m-1"><img height="37" src="~/user/images/achevment/Mask Group 31.png" /></a>
+
+                }
+                @if (Model.User.Instagram is not null)
+                {
+                    <a href="@Model.User.Instagram" class="m-1"><img height="35" src="~/user/images/achevment/Mask Group 29.png" /></a>
+
+                }
+
+                @if (Model.User.Twitter is not null)
+                {
+                    <a href="@Model.User.Twitter" class="m-1"><img height="35" src="~/user/images/achevment/Mask Group 30.png" /></a>
+                }
+            </div>
+
+
+        </div>
+    </div>
+
+
+    
+    <div class="row  d-flex justify-content-evenly">
+
+        <div class="col-5 col-md-3 ">
+            <div class="col-11 my-2 text-white text-center colr shadow rounded p-3">
+               <h3>التمارين</h3>
+               <h1>@Model.exercises.Count</h1>
+            </div>
+        </div>
+        <div class="col-5 col-md-3 ">
+            <div class=" col-11  my-2  text-white text-center colr shadow rounded p-3">
+               <h3>الانظمة  الرياضية</h3>
+               <h1>@Model.sport.Count</h1>
+            </div>
+            </div>
+        <div class="col-5 col-md-3 ">
+            <div class=" col-11  text-white  my-2  text-center colr shadow rounded p-3">
+                <h3>الانظمة  الغذائية</h3>
+                <h1>@Model.meal.Count</h1>
+            </div>
+        </div>
+
+      <div class="col-5 col-md-3 ">
+            <div class=" col-11   text-white  my-2  text-center colr shadow rounded p-3">
+                <h3>الوصفات</h3>
+                <h1>@Model.healthyRecipes.Count</h1>
+            </div>
+        </div>
+
+        </div>
+
+</div>
+
+
+@if (Model.meal.Count > 0)
+{
+   
+     <div class="container-fluid ">
+        <div class="row">
+            <div class="col">
+                <h3 class="bg my-3">الانظمة الغذائية الذي قام باضفتها:</h3>
+            </div>
+        </div>
+            <div class="row  my-3">
+
+            @foreach(var item in Model.meal){
+                <div class="col-md-3  my-2 ">
+                <div class="col-11 card  shadow-sm meal-plan overflow-hidden">
+            <div class="card-header bg-transparent">
+                <p class="text-center  p-0 m-0">#@item.Services.Category.Name</p>
+            </div>
+            <div class="position-relative  hoverable-image" style="height: 200px">
+                        <img src="@item.Image" class=" w-100 position-absolute h-100 top-0 start-0 object-fit-cover" alt="...">
+              
+            </div>
+            <div class="card-body">
+                         <div class="d-flex justify-content-between"> 
+                          <h6 class="card-title fw-bold text-black ">@item.Services.Title</h6>
+                         </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="card-subtitle">
+                                   @item.Services.ShortDescription
+                      </p>
+                            <p class="text-danger text-start h3 fw-bold me-3">$@item.Services.Price</p>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                    <div>
+                                    <p class="m-0">عدد الأسابيع @item.Length   </p>
+                    </div>
+                    <div>
+                        <button class="btn border-0 text-white" style="background-color: #cb8cef">
+                            اشترك الان
+                        </button>
+                    </div>
+                </div>
+            </div>
+         </div>
+           </div>
+     }
+
+           
+    </div>
+  </div>
+       
+}
+
+@if (Model.exercises.Count > 0)
+{
+    <hr />
+    <div class="container-lg">
+        <div class="row">
+            <div class="col">
+                <h3 class="bg my-3">التمارين الذي قام باضفته:</h3>
+            </div>
+        </div>
+    <div class="row p-0 g-0 my-3">
+
+    @foreach (var item in Model.exercises)
+    {   
+                <div class="col-md-3  my-2 ">
+       <div class="col-md-11 card border-0 h-100 ">
+          <div class="position-relative">
+             <img id="imgCard " src="@item.Image" height="220" style="width:100%;" />
+              <img width="40" class="position-absolute"
+                  style="top: 20px; right: 20px" src="./Images/Exercise/heart-svgrepo-com (1).png"
+                   alt="" srcset="" />
+               <img width="70"
+                    class="position-absolute"
+                    style="bottom: 20px; right: 20px"
+                    src="./Images/Exercise/ic_play_circle_outline_24px.png"
+                    alt="" srcset="" />
+         </div>
+
+         <div class="card-body d-flex flex-column justify-content-between">
+                        <h5 class="card-title  text-dark mb-3"> @item.Title  </h5>
+
+        <div class=" d-flex my-1 justify-content-between">
+            <p class="card-text  Exercises_duration_Color fw-bold" style="color: #A566C8;">
+                                @item.Duration قيقة/اليوم
+             </p>
+                  <div class="rating-section">
+                    <i class="bi bi-star-fill text-warning star"></i>
+                    <i class="bi bi-star-fill text-warning star"></i>
+                    <i class="bi bi-star-fill text-warning star"></i>
+                    <i class="bi bi-star-fill text-secondary star"></i>
+                    <i class="bi bi-star-fill text-secondary star"></i>
+                  </div>
+         </div>    
+               <div class=" d-flex justify-content-center">
+                  <button class="btn_Exercises_duration col-auto  text-white rounded-3 fw-bold d-inline-block border-0 px-4 py-2 "  style="background-color: #BE8ADC;">
+                               ابدأ الان
+                     <img class="mx-1" src="/images/Exercise/cart.png" />
+                    </button>
+             </div>
+               </div>
+            </div>
+         </div>
+  
+     }
+   </div>
+   </div>
+}
+
+
+
+@if(Model.healthyRecipes.Count >0)
+{
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3 class="bg my-3">الوصفات الذي قام باضفتها:</h3>
+            </div>
+        </div>
+        <div class="row p-0 g-0 my-3 my-2 ">
+        
+    @foreach(var item in Model.healthyRecipes)
+    {
+                    <div class="col p-3 d-flex justify-content-center align-items-center">
+            <a>
+                <div class="col p-1">
+                    <div class="card rounded-0 shadow-sm">
+                        <div class="position-relative  overflow-hidden image-box" style="height:300px">
+                            <img src="@item.Image" class="card-img-top rounded-0 object-fit-cover position-absolute w-100 start-0 top-0 h-100" alt="...">
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="d-flex justify-content-between align-items-center  px-2 title-box">
+                                <h6 class="card-title text-black fw-bold my-2">
+                                    @item.Title
+                                </h6>
+                                <div class="d-flex justify-content-center align-items-center gap-2">
+                                    <a title="share" class=" border-0 bg-transparent " href="#">
+                                        <i class="bi bi-share fs-4 text-dark"></i>
+                                    </a>
+                                    <a title="heart" class=" border-0 bg-transparent" href="#">
+                                        <i class="bi bi-heart fs-4 text-dark"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between g-0  p-2">
+                                <div class="d-flex">
+                                    <div class="rating">
+                                        <div class="rating position-relative">
+                                            <div class="rating-upper d-flex ">
+                                                <i class="bi bi-star-fill text-black-50"></i>
+                                                <i class="bi bi-star-fill text-black-50"></i>
+                                                <i class="bi bi-star-fill text-black-50"></i>
+                                                <i class="bi bi-star-fill text-black-50"></i>
+                                                <i class="bi bi-star-fill text-black-50"></i>
+                                            </div>
+                                            <div class="rating-lower d-flex  position-absolute top-0 start-0 overflow-hidden  w-${HealthyRecipe.ratePercentage}">
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                                <i class="bi bi-star-fill text-warning"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="m-0">
+                                            @item.RatePercentage
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <i class="bi bi-alarm mx-1"></i>
+                                    <p class="m-0">
+                                        <span> @item.PrepTime</span>
+                                        دقيقة
+                                    </p>
+                                </div>
+                                <div class="d-flex">
+                                    <i class="bi bi-cup-hot mx-1"></i>
+                                    <p class="m-0">متوسط</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+                    </div>
+
+    }
+        </div>
+    </div>
+}
+
+
+@if(Model.sport.Count >0)
+{  <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3 class="bg my-3">الانظمة الرياضية الذي قام باضفتها:</h3>
+            </div>
+        </div>
+         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 p-0 g-0">
+     
+            @foreach(var item in Model.sport)
+            {
+                <div class=" my-2  p-3">
+                    <div class="card  shadow-sm meal-plan overflow-hidden">
+                        <div class="card-header bg-transparent">
+                            <p class="text-center  p-0 m-0"># الأنظمة الحديثة</p>
+                        </div>
+
+                        <div class="position-relative   hoverable-image" style="height: 200px">
+                            <img src="@item.Image" class=" w-100 position-absolute h-100 top-0 start-0 object-fit-cover" alt="...">
+                           
+                        </div>
+
+                        <div class="card-body">
+                           
+                            <h5 class="card-title fw-bold text-black ">
+                                @item.Services.Title
+                            </h5>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="card-subtitle">
+                                    يعتمد على تقليل الكربوهيدرات ومنع السكر المصنع والبطاطا
+                                </p>
+                                <p class="text-danger text-start h4 fw-bold me-3">$@item.Services.Price</p>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <div>
+                                    <p class="m-0">@item.Length أسبوع </p>
+                                </div>
+                                <div>
+                                    <button class="btn border-0 text-white" style="background-color: #cb8cef">
+                                        اشترك الان
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+      
+        </div>
+    </div>
+}
+
+
+
+<div class="container-fluid py-5 ">
+   
+    <div class="row d-flex justify-content-center ">
+        <div class="my-3 mx-auto justify-content-center p-3" style="background-image: url('/user/images/achevment/Group 1689.png'); background-size:cover; background-position:center;">
+
+            <div class="col-5 text-start m-auto bgcolor fw-bolder  p-4  m-2">
+                <h4 class="">
+                    <b>
+                        لديك استفسار؟؟
+                    </b>
+                </h4>
+                <p>ضع سؤالك هنا ونجيب عليك خلال 24 من خلال مدرب او اختصاصي ذو خبرة عالية</p>
+
+            </div>
+            <div class="d-flex justify-content-center">
+                <a href="/Consultations/create" class=" rounded-3 fw-bold  border-0  py-2 px-3 mt-5" style="background-color: #EF8D44;">
+                    <h5 class="text-white "> ادخل سؤالك الان</h5>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

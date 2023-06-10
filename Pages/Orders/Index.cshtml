@@ -1,0 +1,102 @@
+﻿@page
+@model liaqati_master.Pages.Orders.IndexModel
+@{
+}
+
+@section Styles{
+    <link rel="stylesheet" type="text/css" href="~/assets/css/Tables.css" asp-append-version="true">
+    <link href="~/lib/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+}
+
+
+<div style="margin-top:200px" class="table-responsive table-hover">
+    <table class="table  table-borderless" id="Tbl">
+        <thead>
+            <tr>
+                <th scope="col" width="50">
+                    <input class="form-check-input " type="checkbox" id="chk-all" value="">
+                </th>
+                <th scope="col" width="180">تاريخ الطلبية</th>
+                <th scope="col" width="180">السعر الكلي</th>
+                <th scope="col" width="180">كود الخصم</th>
+                <th scope="col" width="180">حالة الطلب</th>
+                <th scope="col" width="180"> </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Orders !=null)
+            {
+                @foreach (var item in Model.Orders)
+                {
+
+                    <tr>
+                        <td scope="row">
+                            <label class="d-block">
+                                <input class="checkbox_animated" type="checkbox">
+                            </label>
+                        </td>
+                        <td>@item.OrderDate</td>
+                        <td>@item.TotalPrice?.ToString("c")</td>
+                        <td>@item.DiscountCode</td>
+
+                    
+
+                        <td>
+                            <div style="max-width:150px text-center">
+                                @switch (item.OrderStatus)
+                                {
+                                    case 0:
+                                        <div> Completed</div>
+@*                                        <partial name="OrderStatusCases/Completed" />
+*@     
+                                                break;
+                                    case 1:
+@*                                        <partial name="OrderStatusCases/Returned" />
+
+                        *@             <div> Returned</div>
+                                           break;
+                                    case 2:
+@*                                        <partial name="OrderStatusCases/Waited" />
+*@
+                                        <div> Waited</div>
+break;
+                                }
+                            </div>
+                        </td>
+
+                     
+                    </tr>
+
+                }
+
+
+            }
+            
+                else
+                {
+                    <tr>
+                        <td colspan="7">
+                            <div class="d-flex justify-content-center align-items-center flex-column">
+                                <i class="bi bi-database-fill-slash text-secondary" style="font-size:120px"></i>
+                                <p>لا يوجد بيانات</p>
+                            </div>
+                        </td>
+                    </tr>
+                }
+         
+
+        </tbody>
+      
+    </table>
+
+</div>
+
+@section Scripts{
+    <script src="~/javascript/script.js"></script>
+    @*<script src="~/javascript/Table.js"></script>*@
+    <script src="~/lib/sweetalert2/sweetalert2.min.js"></script>
+
+
+}
+

@@ -1,0 +1,234 @@
+﻿<nav>
+    <div class="main-navbar">
+        <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
+        <div id="mainnav">
+            <ul class="nav-menu custom-scrollbar">
+                <li class="back-btn">
+                    <div class="mobile-back text-end">
+                        <span>Back</span><i class="fa fa-angle-right ps-2" aria-hidden="true"></i>
+                    </div>
+                </li>
+
+
+                <li class="dropdown  p-2">
+                    <a class="nav-link menu-title" asp-page="/Dashboard/Index">
+                        <i class="bi bi-grid h5 me-2"></i>
+                        <span>
+                            لوحة التحكم
+                        </span>
+                    </a>
+                </li>
+                @if (User.HasClaim(c => c.Type == Database.Admin && c.Value == "true"))
+                {
+                    <li class="dropdown  p-2">
+                        <a class="nav-link menu-title" asp-page="/Users/Index">
+                            <i class="bi bi-people-fill h5 me-2"></i>
+                            <span>
+                                المستخدمين
+                            </span>
+                        </a>
+                    </li>
+                    <li class="dropdown  p-2">
+                        <a class="nav-link menu-title" asp-page="/Categories/IndexAll">
+                            <i class="bi bi-tags-fill h5 me-2"></i>
+                            <span>
+                                الأصناف
+                            </span>
+                        </a>
+                    </li>
+                }
+                <li class="dropdown  p-2">
+                    <a class="nav-link menu-title" asp-page="/Sales/Index">
+                        <i class="bi bi-layout-text-window-reverse h5 me-2"></i>
+                        <span>
+                            المبيعات
+                        </span>
+                    </a>
+                </li>
+
+                <li class="dropdown  p-2">
+                    <a class="nav-link menu-title" href="javascript:void(0)">
+                        <i class="bi bi-list-check  h5 me-2"></i>
+                        <span>
+                            الأنظمة الرياضية
+                        </span>
+                    </a>
+                    <ul class="nav-submenu menu-content" style="display: block;">
+
+                        <li class="p-2 d-flex align-items-center">
+                            <i class="bi bi-circle-fill  h6 m-0 ms-3" style="color:#A566C8;"></i>
+                            <a asp-page="/SportPrograms/Index">
+                                <span>
+                                    جميع الأنظمة الرياضية
+                                </span>
+                            </a>
+                        </li>
+                        <li class="p-2 d-flex align-items-center">
+                            <i class="bi bi-circle-fill  h6 m-0 ms-3" style="color:#A566C8;"></i>
+                            <a asp-page="/SportPrograms/Create">
+                                <span>
+                                    إضافة نظام رياضي
+                                </span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+                <li class="dropdown  p-2">
+                    <a class="nav-link menu-title" href="javascript:void(0)">
+                        <i class="bi bi-menu-button-wide h5 me-2"></i>
+                        <span>
+                            الأنظمة الغذائية
+                        </span>
+                    </a>
+                    <ul class="nav-submenu menu-content" style="display: block;">
+
+                        <li class="p-2 d-flex align-items-center">
+                            <i class="bi bi-circle-fill  h6 m-0 ms-3" style="color:#A566C8;"></i>
+                            <a asp-page="/MealPlan/Index">
+                                <span>
+                                    جميع الأنظمة الغذائية
+                                </span>
+                            </a>
+                        </li>
+                        <li class="p-2 d-flex align-items-center">
+                            <i class="bi bi-circle-fill  h6 m-0 ms-3" style="color:#A566C8;"></i>
+                            <a asp-page="/MealPlan/Create">
+                                <span>
+                                    إضافة نظام غذائي
+                                </span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+                <li class="dropdown  p-2">
+                    <a class="nav-link menu-title" href="javascript:void(0)">
+                        <i class="bi bi-File-earmark-medical h5 me-2"></i>
+                        <span>
+                            الوصفات الصحية
+                        </span>
+                    </a>
+                    <ul class="nav-submenu menu-content" style="display: block;">
+
+                        <li class="p-2 d-flex align-items-center">
+                            <i class="bi bi-circle-fill  h6 m-0 ms-3" style="color:#A566C8;"></i>
+                            <a asp-page="/HealthyReicpe/Index">
+                                <span>
+                                    جميع الوصفات الصحية
+                                </span>
+                            </a>
+                        </li>
+                        <li class="p-2 d-flex align-items-center">
+                            <i class="bi bi-circle-fill  h6 m-0 ms-3" style="color:#A566C8;"></i>
+                            <a asp-page="/HealthyReicpe/Create">
+                                <span>
+                                    إضافة وصفة صحية
+                                </span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+
+                <li class="dropdown  p-2">
+                    <a class="nav-link menu-title" href="javascript:void(0)">
+                        <i class="bi bi-postcard-heart h5 me-2"></i>
+                        <span>
+                            المقالات
+                        </span>
+                    </a>
+                    <ul class="nav-submenu menu-content" style="display: block;">
+
+                        <li class="p-2 d-flex align-items-center">
+                            <i class="bi bi-circle-fill  h6 m-0 ms-3" style="color:#A566C8;"></i>
+                            <a asp-page="/Articles/Index">
+                                <span>
+                                    جميع المقالات
+                                </span>
+                            </a>
+                        </li>
+                        <li class="p-2 d-flex align-items-center">
+                            <i class="bi bi-circle-fill  h6 m-0 ms-3" style="color:#A566C8;"></i>
+                            <a asp-page="/Articles/Create">
+                                <span>
+                                    إضافة مقال
+                                </span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+                <li class="dropdown  p-2">
+                    <a class="nav-link menu-title" href="javascript:void(0)">
+                        <i class="bi bi-basket-fill h5 me-2"></i>
+                        <span>
+                            المنتجات
+                        </span>
+                    </a>
+                    <ul class="nav-submenu menu-content" style="display: block;">
+
+                        <li class="p-2 d-flex align-items-center">
+                            <i class="bi bi-circle-fill  h6 m-0 ms-3" style="color:#A566C8;"></i>
+                            <a asp-page="/Products/Index">
+                                <span>
+                                    جميع المنتجات
+                                </span>
+                            </a>
+                        </li>
+                        <li class="p-2 d-flex align-items-center">
+                            <i class="bi bi-circle-fill  h6 m-0 ms-3" style="color:#A566C8;"></i>
+                            <a asp-page="/Products/Create">
+                                <span>
+                                    إضافة منتج
+                                </span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+                <li class="dropdown  p-2">
+                    <a class="nav-link menu-title" href="javascript:void(0)">
+                        <i class="bi bi-list-columns-reverse h5 me-2"></i>
+                        <span>
+                            الإستشارات
+                        </span>
+                    </a>
+                    <ul class="nav-submenu menu-content" style="display: block;">
+
+                        <li class="p-2 d-flex align-items-center">
+                            <i class="bi bi-circle-fill  h6 m-0 ms-3" style="color:#A566C8;"></i>
+                            <a asp-page="/Consultations/Index">
+                                <span>
+                                    جميع الإستشارات
+                                </span>
+                            </a>
+                        </li>
+                        <li class="p-2 d-flex align-items-center">
+                            <i class="bi bi-circle-fill  h6 m-0 ms-3" style="color:#A566C8;"></i>
+                            <a asp-page="/Consultations/Create">
+                                <span>
+                                    إضافة إستشارة
+                                </span>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </li>
+
+
+
+
+
+            </ul>
+        </div>
+        <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
+    </div>
+</nav>
+

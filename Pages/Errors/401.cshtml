@@ -1,0 +1,72 @@
+﻿@page
+@model SportProductsWeb.Pages.Errors._401Model
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.rtl.min.css" asp-append-version="true" />
+
+    <style>
+        @@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap");
+
+        * {
+            font-family: "Tajawal", sans-serif;
+        }
+
+        .cardError403 {
+            background-color: #f3f2f8;
+        }
+
+        .con_image {
+            background-image: url('/Images/Error/401two.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 600px !important;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container con_image min-vh-100">
+        <div class="row g-0 position-relative min-vh-100 d-flex p-4 justify-content-start align-items-center">
+            <div class="col-md-6 col-lg-5  position-relative p-5 cardError403 rounded-5">
+                <img src="~/images/error/401.png" style="opacity:.2" class="img-fluid" />
+                <div class="position-absolute top-0 start-0  d-flex flex-column justify-content-start align-items-center">
+                    <h1 class="text-center mt-4 text-danger">!! توقف</h1>
+                    <h3 class="text-center mt-4">أين تذهب, لرؤية هذه لصفحة عليك تسجيل الدخول أولاً</h3>
+                    <a style="background-color: #e5c362;"
+                       class="btn p-2 w-50 text-white fw-bold my-3 mediaBtn"
+                       asp-area="Identity" asp-page="/Account/Login">
+                        تسجيل الدخول
+                    </a>
+
+                    <a style="background-color: #be8adc;"
+                       class="btn w-50 py-2 text-white fw-bold my d-inline-block mediaBtn"
+                       asp-area="Identity" asp-page="/Account/SignUp">
+                        حساب جديد
+
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-md-6 d-flex ali justify-content-start">
+                <img class="img-fluid" style="max-height:700px"
+                     src="~/Images/Error/صورة 401.png"
+                     alt=""
+                     srcset="" />
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+</html>
