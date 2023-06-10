@@ -1,0 +1,350 @@
+﻿@page
+@model liaqati_master.Pages.HealthyReicpe.EditHealthyModel
+@{
+    ViewData["Title"] = "تعديل الوصفة";
+    ViewData["LinkName"] = "Categories";
+}
+@section Styles{
+    <link href="~/assets/css/Tables.css" rel="stylesheet" />
+
+    <style>
+
+        body {
+            background-color: #f5f6f1;
+        }
+
+        * {
+            font-family: "Almarai", sans-serif;
+        }
+
+        .ingredient {
+            background: #dacdea;
+            color: #8763b3;
+            border-radius: 20px;
+            padding: 3px 15px;
+        }
+
+        .ingredients {
+            overflow-y: scroll;
+        }
+    </style>
+
+
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="pb-3">@ViewData["Title"]</h3>
+
+                    <form method="post" class="form theme-form" enctype="multipart/form-data">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <input asp-for="HealthyRecipes.Id" class="form-control" placeholder="">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label asp-for="HealthyRecipes.Title"></label>
+                                    <input asp-for="HealthyRecipes.Title" class="form-control" placeholder="">
+                                    <span asp-validation-for="HealthyRecipes.Title" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="mb-3">
+                                    <div class="d-flex  align-items-center justify-content-start  gap-3">
+
+                                        <label class="h5">مجاني</label>
+                                        <div class="switch-lg">
+
+                                            <label class="switch">
+                                                <input type="checkbox" id="IsFree"><span class="switch-state"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="" id="PriceSection">
+
+                                        <label asp-for="HealthyRecipes.Price"></label>
+                                        <input asp-for="HealthyRecipes.Price" class="form-control" placeholder="">
+                                        <span asp-validation-for="HealthyRecipes.Price" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="mb-3">
+                                    <div class="d-flex  align-items-center justify-content-start  gap-3">
+
+                                        <label class="h5" asp-for="HealthyRecipes.IsAvailable"></label>
+                                        <div class="switch-lg">
+
+                                            <label class="switch">
+                                                <input type="checkbox" asp-for="HealthyRecipes.IsAvailable"><span class="switch-state"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+
+                                <div class="mb-3">
+                                    <div class="d-flex  align-items-center justify-content-start  gap-3">
+
+                                        <label class="h5" asp-for="HealthyRecipes.IsFeatured"></label>
+                                        <div class="switch-lg">
+
+                                            <label class="switch">
+                                                <input type="checkbox" asp-for="HealthyRecipes.IsFeatured"><span class="switch-state"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label asp-for="HealthyRecipes.ShortDescription"></label>
+                                    <textarea asp-for="HealthyRecipes.ShortDescription" class="form-control" placeholder=""></textarea>
+                                    <span asp-validation-for="HealthyRecipes.ShortDescription" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label asp-for="HealthyRecipes.Protein"></label>
+                                    <input asp-for="HealthyRecipes.Protein" class="form-control" placeholder="">
+                                    <span asp-validation-for="HealthyRecipes.Protein" class="text-danger"></span>
+
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label asp-for="HealthyRecipes.Calories"></label>
+                                    <input asp-for="HealthyRecipes.Calories" class="form-control" placeholder="">
+                                    <span asp-validation-for="HealthyRecipes.Calories" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label asp-for="HealthyRecipes.Total_Carbohydrate"></label>
+                                    <input asp-for="HealthyRecipes.Total_Carbohydrate" class="form-control" placeholder="">
+                                    <span asp-validation-for="HealthyRecipes.Total_Carbohydrate" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="mb-3">
+                                    <label asp-for="HealthyRecipes.PrepTime"></label>
+                                    <input asp-for="HealthyRecipes.PrepTime" class="form-control" placeholder="">
+                                    <span asp-validation-for="HealthyRecipes.PrepTime" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="mb-3 row  d-flex flex-row align-items-center justify-content-start mb-0">
+                                <label class="col mb-0" asp-for="HealthyRecipes.MealType"></label>
+                                <div class="col-sm-11">
+                                    <div class="m-checkbox-inline d-flex flex-wrap">
+                                        @for (int i = 0; i < Model.MealTypeTypeStatusList.Count; i++)
+                                        {
+
+
+
+                                            <div class=" ">
+                                                <input type="hidden" class="" asp-for="@Model.MealTypeTypeStatusList[i].Value" />
+
+                                                <input type="checkbox" class="checkbox_animated" asp-for="@Model.MealTypeTypeStatusList[i].Selected" />
+                                                <label class="form-check-label p">
+                                                    @Model.MealTypeTypeStatusList[i].Text
+                                                </label>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                                <span asp-validation-for="HealthyRecipes.MealType" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 row  d-flex flex-row align-items-center justify-content-start mb-0">
+                                <label class="col mb-0" asp-for="HealthyRecipes.DietaryType"></label>
+                                <div class="col-sm-11">
+                                    <div class="m-checkbox-inline d-flex flex-wrap">
+
+                                        @for (int i = 0; i < Model.DietaryTypeStatusList.Count; i++)
+                                        {
+
+                                            <div class=" ">
+                                                <input type="hidden" class="" asp-for="@Model.DietaryTypeStatusList[i].Value" />
+
+                                                <input type="checkbox" class="checkbox_animated" asp-for="@Model.DietaryTypeStatusList[i].Selected" />
+                                                <label class="form-check-label p">
+                                                    @Model.DietaryTypeStatusList[i].Text
+                                                </label>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                                <span asp-validation-for="HealthyRecipes.DietaryType" class="text-danger"></span>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label asp-for="Images" class="h6 mb-3"></label>
+                                    <input asp-for="Images" class="form-control" placeholder="" accept="image/*">
+                                    <span asp-validation-for="Images" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <h5 class="h5 my-2 fw-bold">مستعرض الصور</h5>
+                                    <div class="images-viewer d-flex  gap-4 flex-wrap p-4 border bg-light w-100" style="min-height:120px;" id="imagesViewer">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label asp-for="HealthyRecipes.Description"></label>
+                                    <textarea asp-for="HealthyRecipes.Description" class="form-control rich-editor" placeholder=""></textarea>
+                                    <span asp-validation-for="HealthyRecipes.Description" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="row justify-content-center my-5">
+                            <div data-v-2eea9796="" class="col-md-12">
+                                <div class="field-value">
+                                    <div class="form-label d-flex flex-row align-items-center justify-content-between">
+                                        <div>المكونات</div>
+                                    </div>
+                                    <div class="input-group field-value">
+                                        <input class="form-control" id="txtPreparationMethod" placeholder="اكتب شيئاً..." />
+                                        <button id="BtnAdd" type="button" class="text-nowrap bg-white fw-medium btn btn-outline-primary">
+                                            <i class="bi bi-plus h5 fw-bold"></i>
+                                        </button>
+                                    </div>
+                                    <div class="border-top-0 rounded-bottom overflow-hidden border">
+                                        <div class="p-2 bg-white d-flex gap-1 flex-wrap justify-content-start align-items-start ingredients"
+                                             style="height: 80px"
+                                             id="StepsReviewer"></div>
+                                    </div>
+                                    <div class="small fw-bold text-end mt-1 text-danger d-flex">
+                                        <div class="field-area-visible-on-hover ms-auto" id="error"></div>
+                                    </div>
+                                    <div class="small fw-bold text-end mt-1 text-danger d-flex">
+                                        <span asp-validation-for="HealthyRecipes.PreparationMethod" class="text-danger"></span>
+                                    </div>
+                                    <div class="small fw-bold text-end mt-1 text-muted d-flex">
+                                        <div class="field-area-visible-on-hover ms-auto" id="NoofSteps"></div>
+                                    </div>
+                                </div>
+                                <textarea class="form-control" hidden asp-for="HealthyRecipes.PreparationMethod" id="HealthyRecipes_PreparationMethod"></textarea>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center my-5">
+                            <div data-v-2eea9796="" class="col-md-12">
+                                <div class="field-value">
+                                    <div class="form-label d-flex flex-row align-items-center justify-content-between">
+                                        <div>المكونات</div>
+                                    </div>
+                                    <div class="input-group field-value">
+                                        <input class="form-control" id="txtIngredientName" placeholder="اكتب شيئاً..." />
+                                        <input class="form-control" id="txtIngredientQuantity" placeholder="اكتب شيئاً..." />
+                                        <select class="form-control" id="txtIngredientUnit" placeholder="اكتب شيئاً...">
+                                            <option value="cup">كوب</option>
+                                            <option value="spoon">معلقة</option>
+                                            <option value="gram">غرام</option>
+                                        </select>
+
+                                        <button id="BtnAddIngredients"
+                                                type="button"
+                                                class="text-nowrap bg-white fw-medium btn btn-outline-primary">
+                                            <i class="bi bi-plus h5 fw-bold"></i>
+                                        </button>
+
+                                    </div>
+                                    <div class="rounded-bottom overflow-hidden ">
+                                        <div class="row ">
+                                            <div class="col-sm-12">
+                                                <div class="card mt-3 p-0 border-raduis">
+
+                                                    <div class="table-responsive table-hover">
+                                                        <table class="table  table-borderless" id="Tbl">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th scope="col" width="180">المكون</th>
+                                                                    <th scope="col" width="180">الكمية</th>
+                                                                    <th scope="col" width="180">وحدة القياس</th>
+                                                                    <th scope="col" width="180"></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="ingredients_container">
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="small fw-bold text-end mt-1 text-danger d-flex">
+                                        <span asp-validation-for="HealthyRecipes.Ingredients" class="text-danger"></span>
+                                    </div>
+                                    <div class="small fw-bold text-end mt-1 text-muted d-flex">
+                                        <div class="field-area-visible-on-hover ms-auto"
+                                             id="NoFoIngredients"></div>
+
+                                    </div>
+                                </div>
+                                <textarea class="form-control"
+                                          id="txtAreaIngredients" hidden asp-for="HealthyRecipes.Ingredients"></textarea>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end ">
+                            <div class="col-sm-4 justify-content-end d-flex">
+                                <div class="mb-3">
+                                    <button class="btn-primary btn  mx-auto col-auto" type="submit"> حقظ التعديلات <i class="bi bi-plus-square-dotted"></i> </button>
+                                    <a class="btn-danger btn  mx-auto col-auto" asp-page="./Index"> الغاء <i class="bi bi-arrow-90deg-down"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="~/javascript/uploadfiles.js" asp-append-version="true"></script>
+    <script src="~/JavaScript/HealthyRecipecs.js" asp-append-version="true"></script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="~/javascript/richtexteditor.js" asp-append-version="true"></script>
+    <script>
+        let IsFree = document.getElementById('IsFree');
+        let PriceSection = document.getElementById('PriceSection');
+        IsFree.addEventListener('change', () => {
+            PriceSection.classList.toggle('d-none')
+            PriceSection.classList.toggle('d-block')
+            if (IsFree.checked) {
+                PriceSection.querySelector('input').value = 0;
+            } else {
+                PriceSection.querySelector('input').value = null;
+
+
+            }
+        })
+        let imags = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.paths));
+        if (imags)
+            imags.forEach(p => RenderImages(p))
+
+    </script>
+}

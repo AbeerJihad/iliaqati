@@ -1,0 +1,428 @@
+@import url("https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+
+* {
+    font-family: "Almarai", sans-serif;
+}
+
+
+.hrcolor {
+    background-color: #b9aff5;
+    height: 5px !important;
+    width: 200px;
+}
+
+.main-header {
+    background-image: linear-gradient(#00000060, #00000060), url("/Images/mainbg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.btn-startnow {
+    background-color: #a864c8;
+}
+
+.btn-tas,
+.btn-tas:hover {
+    color: #a864c8;
+}
+
+.raduisbg {
+    background-image: url("./Path 2750.png");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.header-font {
+    font-size: 50px;
+}
+
+@media screen and (min-width: 992px) {
+    .Products-index {
+        position: absolute;
+    }
+}
+
+@media screen and (max-width: 992px) {
+
+    .header-font {
+        font-size: 40px;
+    }
+
+    .raduisbg {
+        background-image: none;
+    }
+
+    .sec {
+        min-height: auto !important;
+    }
+}
+
+.hrcolor {
+    color: #b9aff5;
+    height: 4px !important;
+}
+
+li::marker {
+    color: #FF725E !important;
+}
+
+.poss {
+    transition: .5s;
+    top: 0;
+    opacity: 1;
+    bottom: 0;
+    background-color: #0000006e;
+    border-radius: 10.5%;
+    border: hidden !important;
+}
+
+
+.divhover:hover .poss {
+    opacity: 0;
+    background-color: transparent;
+}
+
+
+.imgcircle:hover {
+    border: 3px solid #B9AFF5;
+}
+
+.ih-item {
+    position: relative;
+    transition: all 0.35s ease-in;
+}
+
+
+
+    .ih-item.circle {
+        position: relative;
+        border-radius: 50%;
+    }
+
+        .ih-item.circle .img {
+            position: relative;
+            width: 17rem;
+            height: 17rem;
+            border-radius: 50%;
+            border: 5px solid white;
+        }
+
+
+        .ih-item.circle .info {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 17rem;
+            height: 17rem;
+            text-align: center;
+            border-radius: 50%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+* {
+    font-family: Almarai;
+}
+
+
+li::marker {
+    color: #FF725E !important;
+}
+
+.poss {
+    transition: .5s;
+    top: 0;
+    opacity: 1;
+    bottom: 0;
+    background-color: #0000006e;
+    border-radius: 10.5%;
+    border: hidden !important;
+}
+
+
+.divhover:hover .poss {
+    opacity: 0;
+    background-color: transparent;
+}
+
+
+.imgcircle:hover {
+    border: 3px solid #B9AFF5;
+}
+
+.ih-item,
+.ih-item div {
+    position: relative;
+    transition: all 0.2s ease-in;
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+}
+
+    .ih-item.circle {
+        position: relative;
+        border-radius: 50%;
+    }
+
+        .ih-item.circle .img {
+            position: relative;
+            width: 17rem;
+            height: 17rem;
+            border-radius: 50%;
+            border: 5px solid white;
+        }
+
+
+        .ih-item.circle .info {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 17rem;
+            height: 17rem;
+            text-align: center;
+            border-radius: 50%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+    .ih-item.square {
+        position: relative;
+    }
+
+        .ih-item.square .info {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+    .ih-item.circle {
+        border: 4px solid black !important;
+    }
+
+        .ih-item.circle:hover {
+            border-color: white !important;
+        }
+
+        .ih-item.circle .img {
+            opacity: 1;
+        }
+
+        .ih-item.circle .info {
+            background: rgba(0, 0, 0, .5);
+            opacity: 0;
+        }
+
+            .ih-item.circle .info p {
+                color: white;
+                margin: 0 30px;
+                font-size: 12px;
+            }
+
+
+
+        .ih-item.circle .div1:hover .info {
+            opacity: 1;
+        }
+
+.Product {
+    background-color: #F9F9F9;
+}
+
+
+
+
+
+.Pro {
+    position: relative;
+}
+
+
+* {
+    font-family: Almarai;
+}
+
+.imgpos {
+    top: -30%;
+    right: -35%;
+}
+
+.imgpos2 {
+    bottom: -30%;
+    right: 45%;
+}
+
+.rectangle {
+    /*  background-image: url('img/Group 1743.png');
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;*/
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: #EAEAEA;
+    /*  width: 100%;
+    height: 28rem;*/
+    transform: rotate(2deg);
+}
+
+
+.imgpo {
+    /*transform: rotate(-3deg);*/
+    top: 0;
+    left: 0;
+    width: 40%;
+}
+
+
+@media (max-width:767.98px) {
+
+    .rectangle {
+        transform: rotate(0deg);
+        margin-top: 0%;
+        margin-bottom: 0%;
+    }
+
+    .Pro {
+        margin: 0;
+        padding: 0;
+    }
+
+    .Product {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.ih-item.square {
+    position: relative;
+}
+
+    .ih-item.square .info {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+    }
+
+.Product {
+    background-color: #F9F9F9;
+}
+
+
+
+
+
+
+
+.Pro {
+    position: relative;
+}
+
+
+* {
+    font-family: Almarai;
+}
+
+.imgpos {
+    top: -30%;
+    right: -35%;
+}
+
+.imgpos2 {
+    bottom: -30%;
+    right: 45%;
+}
+
+.rectangle {
+    /*  background-image: url('img/Group 1743.png');
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;*/
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: #EAEAEA;
+    /*  width: 100%;
+    height: 28rem;*/
+    transform: rotate(2deg);
+}
+
+
+.imgpo {
+    /*transform: rotate(-3deg);*/
+    top: 0;
+    left: 0;
+    width: 40%;
+}
+
+
+@media (max-width:767.98px) {
+
+    .rectangle {
+        transform: rotate(0deg);
+        margin-top: 0%;
+        margin-bottom: 0%;
+    }
+
+    .Pro {
+        margin: 0;
+        padding: 0;
+    }
+
+    .Product {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+
+
+
+
+.Service img {
+    max-height: 500px;
+}
+
+
+
+
+.article-card-index {
+    filter: brightness(0.7);
+    transition: 0.3s;
+    border-radius: 40px;
+}
+
+    .article-card-index:hover {
+        filter: brightness(1);
+    }
+
+.border-radius-40px {
+    border-radius: 40px;
+}
+
+.article-card-index:hover .overlay-art {
+    padding-bottom: 40px !important;
+}
+
+.overlay-art {
+    border-radius: 0 0 40px 40px;
+    background-color: rgba(255, 255, 255, 0.825);
+    transition: 0.3s;
+}
+
+.Modawana {
+    background-color: #f0eff8;
+}

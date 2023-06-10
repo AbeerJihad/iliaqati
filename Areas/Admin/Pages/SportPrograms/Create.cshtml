@@ -1,0 +1,605 @@
+﻿@page "{Id?}"
+@model liaqati_master.Pages.Programs.CreatProgrameModel
+@{
+}
+
+
+
+<div class="modal fade" id="editModel" tabindex="-1" aria-labelledby="editLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editLabel">Edit </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Form Wizard And Validation</h5><span>Validation Step Form Wizard</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="stepwizard">
+                                <div class="stepwizard-row setup-panel">
+                                    <div class="stepwizard-step">
+                                        <a class="btn btn-primary" href="#step-1">1</a>
+                                        <p>Step 1</p>
+                                    </div>
+                                    <div class="stepwizard-step">
+                                        <a class="btn btn-light" href="#step-2">2</a>
+                                        <p>Step 2</p>
+                                    </div>
+                                    <div class="stepwizard-step">
+                                        <a class="btn btn-light" href="#step-3">3</a>
+                                        <p>Step 3</p>
+                                    </div>
+                                    <div class="stepwizard-step">
+                                        <a class="btn btn-light" href="#step-4">4</a>
+                                        <p>Step 4</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <form id="formAddExercies" method="POST">
+                                <div class="setup-content" id="step-1">
+                                    <div class="col-xs-12">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="Exercises.Title" class="control-label"></label>
+                                                <input required name="Title" asp-for="Exercises.Title" class="form-control">
+
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Exercises.Detail" class="control-label"></label>
+                                                <input required name="Detail" asp-for="Exercises.Detail" class="form-control">
+                                                <span class="text-danger" asp-validation-for="Exercises.Detail"></span>
+
+                                            </div>
+                                            <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="setup-content" id="step-2">
+                                    <div class="col-xs-12">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="Exercises.Price" class="control-label"></label>
+                                                <input required name="Price" asp-for="Exercises.Price" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Exercises.TraningType" class="control-label"></label>
+                                                <input required name="TraningType" asp-for="Exercises.TraningType" class="form-control">
+                                            </div>
+                                            <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="setup-content" id="step-3">
+                                    <div class="col-xs-12">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="Exercises.Difficulty" class="control-label"></label>
+                                                <input required name="Difficulty" asp-for="Exercises.Difficulty" class="form-control">
+                                            </div>
+                                            <div class="form-group">
+                                                <label asp-for="Exercises.Duration" class="control-label"></label>
+                                                <input required name="Duration" asp-for="Exercises.Duration" class="form-control">
+
+                                            </div>
+                                            <button class="btn btn-primary nextBtn pull-right" type="button">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="setup-content" id="step-4">
+                                    <div class="col-xs-12">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label asp-for="Exercises.Equipments" class="control-label"></label>
+                                                <input required name="Equipments" asp-for="Exercises.Equipments" class="form-control">
+                                            </div>
+
+                                            <button onclick="FinishAddExercises(this)" class="btn btn-secondary pull-right" type="button">Finish!</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<h4 class="text-center">اضافة البرنامج الرياضي</h4>
+<hr />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form id="FormProgramAdd" asp-page-handler="Add" enctype="multipart/form-data" method="post" class="form theme-form">
+                        <div asp-validation-summary="All"></div>
+                        <input name="Id" value="@Model.SportsProgram.Id" id="IdProg" asp-for="SportsProgram.Id" hidden />
+
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="SportsProgram.Services!.Title"></label>
+                                    <input asp-for="SportsProgram.Services!.Title" class="form-control  @Model.ReadOnly" placeholder="">
+                                    <span class="text-danger" asp-validation-for="SportsProgram.Services!.Title"></span>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="SportsProgram.Services!.Price"></label>
+                                    <input asp-for="SportsProgram.Services!.Price" class="form-control  @Model.ReadOnly" placeholder="">
+                                    <span class="text-danger" asp-validation-for="SportsProgram.Services!.Price"></span>
+
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label asp-for="Images" class="h6 mb-3"></label>
+                                    <input asp-for="Images" class="form-control" placeholder="" accept="image/*">
+                                    <span asp-validation-for="Images" class="text-danger"></span>
+                                </div>
+                                <div class="mb-3">
+                                    <h5 class="h5 my-2 fw-bold">مستعرض الصور</h5>
+                                    <div class="images-viewer d-flex  gap-4 flex-wrap p-4 border bg-light w-100" style="min-height:120px;" id="imagesViewer">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label asp-for="SportsProgram.Services!.Description"></label>
+
+                                    <textarea required asp-for="SportsProgram.Services!.Description" class="form-control  @Model.ReadOnly rich-editor" rows="3"></textarea>
+
+
+                                    <span class="text-danger" asp-validation-for="SportsProgram.Services!.Description"></span>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+
+                            <div class="mb-3 row  d-flex flex-row align-items-center justify-content-start mb-0">
+                                <label class="col mb-0" asp-for="SportsProgram.TrainingType"></label>
+                                <div class="col-sm-11">
+                                    <div class="m-checkbox-inline d-flex flex-wrap">
+                                        @for (int i = 0; i < Model.TraningTypeStatusList.Count; i++)
+                                        {
+                                            <div class=" ">
+                                                <input type="hidden" class="" asp-for="@Model.TraningTypeStatusList[i].Value" />
+
+                                                <input type="checkbox" class="checkbox_animated" asp-for="@Model.TraningTypeStatusList[i].Selected" />
+                                                <label class="form-check-label p">
+                                                    @Model.TraningTypeStatusList[i].Text
+                                                </label>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                                <span asp-validation-for="SportsProgram.TrainingType" class="text-danger"></span>
+                            </div>
+
+
+                            <div class="mb-3 row  d-flex flex-row align-items-center justify-content-start mb-0">
+                                <label class="col mb-0" asp-for="SportsProgram.BodyFocus"></label>
+                                <div class="col-sm-11">
+                                    <div class="m-checkbox-inline d-flex flex-wrap">
+                                        @for (int i = 0; i < Model.BodyFocusStatusList.Count; i++)
+                                        {
+                                            <div class=" ">
+                                                <input type="hidden" class="" asp-for="@Model.BodyFocusStatusList[i].Value" />
+
+                                                <input type="checkbox" class="checkbox_animated" asp-for="@Model.BodyFocusStatusList[i].Selected" />
+                                                <label class="form-check-label p">
+                                                    @Model.BodyFocusStatusList[i].Text
+                                                </label>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                                <span asp-validation-for="SportsProgram.BodyFocus" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 row  d-flex flex-row align-items-center justify-content-start mb-0">
+                                <label class="col mb-0" asp-for="SportsProgram.Difficulty"></label>
+                                <div class="col-sm-11">
+                                    <div class="m-checkbox-inline d-flex flex-wrap">
+                                        @for (int i = 0; i < Model.DifficultyStatusList.Count; i++)
+                                        {
+                                            <div class=" ">
+
+
+                                                <input type="radio" class="form-check-input" asp-for="@Model.DifficultyStatus" value="@Model.DifficultyStatusList[i].Value" />
+                                                <label class="form-check-label p">
+                                                    @Model.DifficultyStatusList[i].Text
+                                                </label>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                                <span asp-validation-for="SportsProgram.Difficulty" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3 row  d-flex flex-row align-items-center justify-content-start mb-0">
+                                <label class="col mb-0" asp-for="SportsProgram.Equipment"></label>
+                                <div class="col-sm-11">
+                                    <div class="m-checkbox-inline d-flex flex-wrap">
+                                        @for (int i = 0; i < Model.EquipmentsTypeStatusList.Count; i++)
+                                        {
+                                            <div class=" ">
+                                                <input type="hidden" class="" asp-for="@Model.EquipmentsTypeStatusList[i].Value" />
+
+                                                <input type="checkbox" class="checkbox_animated" asp-for="@Model.EquipmentsTypeStatusList[i].Selected" />
+                                                <label class="form-check-label p">
+                                                    @Model.EquipmentsTypeStatusList[i].Text
+                                                </label>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                                <span asp-validation-for="SportsProgram.Equipment" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="mb-3">
+                                    <label class="d-block" asp-for="SportsProgram.Length"></label>
+                                    <select required style="height:35px;" class="col-12 border border-light rounded-3  @Model.ReadOnly" id="selectLength" asp-for="SportsProgram.Length">
+                                        <option value="">ادخل عدد اسابيع النظام الرياضي</option>
+                                        <option value="1">اسبوع</option>
+                                        <option value="2">اسبوعين</option>
+                                        <option value="4">  اربعة اسابيع</option>
+                                    </select>
+                                    <span class="text-danger" asp-validation-for="SportsProgram.Length"></span>
+
+                                </div>
+                            </div>
+
+                            @* <div class="col-12 col-md-6">
+                            <div class="mb-3">
+                            <label class="d-block" asp-for="SportsProgram.Services!.Category!.Name"></label>
+                            <select style="height:35px;" class="col-12 border border-light rounded-3" asp-for="SportsProgram.Services!.CategoryId" asp-items="Model.CatogeryName">
+                            <option value="-1"> ادخل اسم الصنف الخاص بالنظام الرياضي</option>
+
+                            </select>
+                            <span class="text-danger" asp-validation-for="SportsProgram.Services!.CategoryId"></span>
+
+                            </div>
+                            </div>
+                            *@
+                        </div>
+                        @*    <div>
+                        @{
+                        if (Model.SportsProgram.Exercies_Programs != null)
+                        {
+                        <table class="table table-striped table-hover table-bordered table-responsive  @Model.ReadOnly">
+                        <thead class="table-Secondary">
+                        <tr>
+
+                        <th scope="col">الاسبوع</th>
+                        <th scope="col">اليوم</th>
+                        <th scope="col"> اسم التمرين</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tableBodyApi">
+                        @for (int x = 0; x < Model.SportsProgram.Exercies_Programs!.Count; x++)
+                        {
+
+                        string? id = Model.SportsProgram.Exercies_Programs[x].ExerciseId;
+                        Exercise? exercise = await Model.getExercise(id);
+                        <tr>
+                        <td>@Model.SportsProgram.Exercies_Programs[x].Week   الاسبوع</td>
+                        <td>@Model.SportsProgram.Exercies_Programs[x].Day  اليوم </td>
+                        <td>@exercise?.Title</td>
+                        </tr>
+
+                        }
+                        </tbody>
+                        </table>
+                        }
+                        }
+                        </div>
+
+                        *@
+
+
+
+                        @{
+                            if (Model.btnSave == 0)
+                            {
+                                <div class="row">
+                                    <div class="col-4 mx-auto">
+                                        <div class="mb-3">
+                                            <button style="margin-right:35%" id="btnSave" class="btn btn-secondary"> Save </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+
+
+
+
+
+
+
+
+
+                        @*   <div class="row">
+                        <div class="col-sm-4">
+                        <div class="mb-3">
+                        <label> اختر التمارين الخاصة بالنظام الرياضي</label>
+                        <select id="SelectExercise" aria-label="Default select example" class="js-example-rtl " multiple="multiple">
+                        </select>
+
+
+                        </div>
+                        </div>
+                        </div>
+
+                        *@
+
+
+
+
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    @{
+        if (Model.SportsProgram.Exercies_Programs != null)
+        {
+            <table class="table table-striped table-hover table-bordered table-responsive">
+                <thead class="table-Secondary">
+                    <tr>
+
+                        <th scope="col">الاسبوع</th>
+                        <th scope="col">اليوم</th>
+                        <th scope="col"> اسم التمرين</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBodyApi">
+
+
+
+                    @for (int x = 0; x < Model.SportsProgram.Exercies_Programs!.Count; x++)
+                    {
+
+                        string id = @Model.SportsProgram.Exercies_Programs[x].ExerciseId;
+                        Exercise? exercise = await Model.getExercise(id);
+                        <tr class="bg-Success">
+                            <td> الاسبوع @Model.SportsProgram.Exercies_Programs[x].Week   </td>
+                            <td> اليوم @Model.SportsProgram.Exercies_Programs[x].Day   </td>
+                            <td>@exercise.Title</td>
+
+                            <td>
+                                @{
+                                    var item = @Model.SportsProgram.Exercies_Programs[x];
+                                    item.SportsProgram = null;
+                                    item.Exercise = null;
+                                }
+
+
+                            </td>
+
+
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        }
+
+
+
+    }
+</div>
+
+
+<div id="DivSystem" class="container-lg my-5  @Model.Display">
+    <div class="row justify-content-center my-5">
+        <div data-v-2eea9796="" class="col-md-12">
+            <div class="field-value">
+                <div class="form-label d-flex flex-row align-items-center justify-content-between">
+                    <div></div>
+                </div>
+                <div class="bg-white p-4">
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="mb-3">
+                                <label>اختر الاسبوع </label>
+                                <select style="height:35px;" class="col-12 border border-light rounded-3" name="Week" id="selectLengthWeek">
+                                    <option disabled value="-1">اختر الاسبوع</option>
+
+                                    @for (int x = 1; x <= Model.SportsProgram!.Length; x++)
+                                    {
+                                        <option value="@x">  الاسبوع @x</option>
+
+                                    }
+
+
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <div class="mb-3">
+                                <label class="d-block"> اختر اليوم</label>
+                                <select style="height:35px;" class="col-12 border border-light rounded-3 form-select" id="selectDays"
+                                        placeholder="اكتب شيئاً...">
+                                    <option value="1">اليوم الاول</option>
+                                    <option value="2">اليوم الثاني</option>
+                                    <option value="3">اليوم الثالث</option>
+                                    <option value="4">اليوم الرابع</option>
+                                    <option value="5">اليوم الخامس</option>
+                                    <option value="6">اليوم السادس</option>
+                                    <option value="7">اليوم السابع</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label class="d-block"> اختر التمارين الخاصة بالنظام الرياضي</label>
+                                <select onchange="SelectExerciseFun()" style="min-height:250px;" class="col-12 form-control  form-select border border-light rounded-3" id="SelectExercises" multiple="multiple">
+                                    <option value="-1"> اختر التمارين</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="col-auto py-4">
+                            <form id="formProgramSystem" method="post" asp-page="Create" asp-page-handler="AddSystem">
+                                <input name="Id" value="@Model.SportsProgram.Id" id="IdProg" name="id" asp-for="SportsProgram.Id" hidden />
+
+                                <a id="BtnAdd"
+                                   class="text-nowrap bg-white fw-medium btn btn-outline-primary">
+                                    <i class="bi bi-plus h5 fw-bold"></i>
+                                </a>
+                            </form>
+
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="col-4">
+                        <label>لاضافة تمرين غير موجود  </label>
+                        <a asp-area="admin" asp-page="/Exercises/create"
+                           class="text-nowrap bg-white fw-medium btn btn-outline-primary">
+                            <i class="bi bi-plus h5 fw-bold"></i>
+                        </a>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js"></script>
+    <script src="~/javascript/uploadfiles.js" asp-append-version="true"></script>
+
+    <script>
+
+        $(".select2_Exercises").select2({
+            theme: "bootstrap-5",
+            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+            placeholder: $(this).data('placeholder'),
+            closeOnSelect: false,
+            tags: true,
+            allowClear: true,
+        });
+    </script>
+
+
+
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="~/javascript/richtexteditor.js" asp-append-version="true"></script>
+
+    <script src="~/javascript/addex_progbyapi.js" asp-append-version="true"></script>
+
+    <script src="~/jsapi/exerciseapi.js"></script>
+
+
+    @* <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="~/jsapi/programexcercies.js"></script>*@
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })();
+
+
+
+        let imags = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(Model.imagepath));
+        if (imags)
+            RenderImages(imags)
+
+
+        function RenderImages(imageUrl, fileName = null) {
+            var imageCard = document.createElement('div');
+            imageCard.className = "position-relative rounded-3 bg-white";
+            imageCard.style.width = '150px';
+            imageCard.style.height = '150px';
+            if (fileName == null) {
+                imageCard.innerHTML += `<div class="position-absolute rounded " style="inset:20px;"><img src="${imageUrl}" class="w-100 h-100" style="inset:5em;object-fit:cover" /></div>`
+            } else {
+                imageCard.innerHTML += `<div class="position-absolute rounded " style="inset:20px;"><img src="${imageUrl}" class="w-100 h-100" style="inset:5em;object-fit:cover" /></div><button class="btn d-flex align-items-center  justify-content-center shadow  p-0 bg-white rounded-circle position-absolute delete-btn" type="button" onclick="DeleteFile('${fileName}');"> <i class="bi bi-x"></i></button>`
+
+            }
+            imagesViewer.appendChild(imageCard)
+        }
+    </script>
+}
+
+
+
+

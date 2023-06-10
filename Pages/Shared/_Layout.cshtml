@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["LinkName"] - liaqati_master</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.rtl.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/User/css/nice-select2.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/node_modules/bootstrap-icons/font/bootstrap-icons.css" asp-append-version="true" />
+    <link href="~/assets/css/width.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/user/css/footercss.css" rel="stylesheet" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="~/User/css/index.css" asp-append-version="true" />
+    <link href="~/lib/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/dropDown/style.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+    <partial name="DesktopNav" />
+    <partial name="MobileNav" />
+    @RenderBody()
+    <partial name="Footer" />
+    <div class="blur-div top-0 start-0 w-100 min-vh-100 position-fixed"></div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script rel="stylesheet" src="~/lib/bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="~/User/js/Index.js" asp-append-version="true"></script>
+    <script src="~/jsapi/productsapi/productsmodel.js"></script>
+    <script>
+
+        window.onload = () => CountCart();
+        console.log("ss");
+
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

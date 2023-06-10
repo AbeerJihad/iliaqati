@@ -1,0 +1,75 @@
+﻿@page
+@model SportProductsWeb.Pages.Errors._404Model
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.rtl.min.css" asp-append-version="true" />
+
+    <style>
+        @@import url("https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap");
+
+        * {
+            font-family: "Tajawal", sans-serif;
+        }
+
+        .con_image {
+            background-image: url("/Images/Error/404-2 .png") !important;
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 600px !important;
+        }
+
+        .cardError404 {
+            background-color: #f3f2f8;
+        }
+
+        @@media only screen and (max-width: 480px) {
+            .mediaBtn {
+                width: 75% !important;
+                margin-right: 12.5% !important;
+            }
+
+            .media-image {
+                margin-top: -100px !important;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container con_image min-vh-100">
+        <div class="row g-0 p-3 d-flex justify-content-start align-items-center min-vh-100">
+            <div class="col-12 col-md-10  col-lg-5 p-4 cardError404 rounded-5">
+                <div class="d-flex justify-content-center align-items-center flex-column">
+                    <h3 class="text-center">عذرا هذه الصفحة غير موجودة</h3>
+                    <a style="background-color: #e5c362"
+                       class="btn p-2 w-50 text-white fw-bold my-3 mediaBtn"
+                       href="javascript:history.go(-1)">
+                        الرجوع الى الصفحة السابقة
+                    </a>
+
+                    <a style="background-color: #be8adc; "
+                       class="btn w-50 py-2 text-white fw-bold my-3 d-inline-block mediaBtn"
+                       asp-page="/home/index2">
+                        الصفحة الرئيسية
+                    </a>
+                    <a style="color: #be8adc"
+                       class="w-50 fw-bold my-3 d-inline-block text-center h5"
+                       asp-page="/ContactUs/index">
+                        تواصل مع الدعم الفني
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

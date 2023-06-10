@@ -1,0 +1,201 @@
+﻿
+body {
+    background-color: #f5f6f1;
+}
+
+table thead tr {
+    background-image: linear-gradient(to right, #a566c8 0%, #5e3276 51%, #a566c8 100%);
+    box-shadow: 0 0px 12px -12px #a566c8, 0 4px 23px 0px rgba(0,0,0,0.12), 0 8px 10px -5px #a566c8 !important;
+}
+
+    /*table thead tr th:nth-child(1) {*/
+    /* border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;*/
+    /*overflow: hidden;
+    }
+
+    table thead tr th:last-child {*/
+    /* border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;*/
+    /*overflow: hidden;
+    }*/
+
+    table thead tr th {
+        padding: 15px !important;
+        color: white !important;
+    }
+
+table tr th,
+table tr td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+
+th input[type="checkbox"] {
+    height: 1.3rem;
+    width: 1.3rem;
+}
+
+.form-check-input:indeterminate,
+.form-check-input:checked {
+    background-color: #A566C8 !important;
+    accent-color: #A566C8;
+    border-color: white !important;
+    border-width: 2px;
+}
+
+.img__box {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    cursor: zoom-in;
+}
+
+.image__viewer .img__box2 {
+    max-width: 600px;
+    max-height: 400px;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.img__box2 img,
+.img__box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .5s;
+}
+
+.image__viewer {
+    background: rgba(0, 0, 0, .5);
+}
+
+.manage__data {
+    background: #211f2c;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#BtnClose {
+    display: inline-block;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 10px !important;
+}
+
+.border-raduis {
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.pagination a.disabled {
+    pointer-events: none;
+}
+
+.pagination .page-item .page-link {
+    color: #A566C8;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .pagination .page-item .page-link.active {
+        background-image: linear-gradient(to right, #a566c8 0%, #5e3276 51%, #a566c8 100%);
+        color: white;
+    }
+
+.rtl .page-item:first-child .page-link
+.rtl .page-item:last-child .page-link {
+    border-radius: 0 !important;
+}
+
+
+.text-sm {
+    font-size: 12px !important;
+}
+
+
+.btn-edit {
+    color: #a566c8 !important;
+    border: 1.5px solid #a566c8;
+    padding: 0.375rem 0.75rem;
+    transition: .2s;
+}
+
+    .btn-edit:hover {
+        background-image: linear-gradient(to right, #a566c8 0%, #5e3276 51%, #a566c8 100%);
+        color: white !important;
+        box-shadow: 0 14px 26px -12px #a566c8, 0 4px 23px 0px rgba(0,0,0,0.12), 0 8px 10px -5px #a566c8 !important;
+    }
+
+.btn-details {
+    color: #00b289 !important;
+    border: 1.5px solid #00b289;
+    padding: 0.375rem 0.75rem;
+    transition: .2s;
+}
+
+    .btn-details:hover {
+        background-image: linear-gradient(to right, #00b289 0%, #00b289 51%, #00b289 100%);
+        color: white !important;
+        box-shadow: 0 14px 26px -12px #00b289, 0 4px 23px 0px rgba(0,0,0,0.12), 0 8px 10px -5px #00b289 !important;
+    }
+
+.btn-delete {
+    color: #FF7273 !important;
+    border: 1.5px solid #FF7273;
+    padding: 0.375rem 0.75rem;
+}
+
+    .btn-delete:hover {
+        background-color: #FF7273;
+        color: white !important;
+        box-shadow: 0 14px 26px -12px #FF7273, 0 4px 23px 0px rgba(0,0,0,0.12), 0 8px 10px -5px #FF7273 !important;
+    }
+
+.table tr.is-selected {
+    background-color: #a566c820 !important;
+    color: rgba(0,0,0,.7) !important;
+}
+
+
+.offcanvas-body::-webkit-scrollbar {
+    width: 10px;
+    background-color: #a566c830;
+    border-radius: 10px;
+}
+
+.offcanvas-body::-webkit-scrollbar-thumb {
+    width: 10px;
+    background-color: #a566c860;
+    border-radius: 10px;
+}
+
+@media screen and (max-width:992px) {
+    .image__viewer .img__box2 {
+        max-width: 300px;
+        max-height: 400px;
+        overflow: hidden;
+        border-radius: 20px;
+    }
+
+    .image__viewer > div {
+        max-width: 300px;
+    }
+}
+
+.toggle-details.active {
+    background-color: white !important;
+    color: #8763b3 !important;
+}
+
+.sub-row {
+    display: none !important;
+}
+
+    .sub-row.show {
+        display: table-row !important;
+    }
